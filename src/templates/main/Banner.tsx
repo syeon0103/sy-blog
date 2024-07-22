@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 
 const Banner = () => {
     const text = '뉴스   2024.07.21   사이트 리뉴얼 중입니다.';
-    const repeatCount = 10; // 반복 횟수
+    const repeatCount = 10; // 추후 수정
     const generateRepeatedText = () => {
         const items = [];
         for (let i = 0; i < repeatCount; i++) {
             items.push(
-                <div key={i} style={{ display: 'inline-block', marginLeft: '300px' }}>
+                <div key={i} style={{ display: 'inline-block', marginLeft: '500px' }}>
                     <div className="animate-marquee">
                         {text}
                     </div>

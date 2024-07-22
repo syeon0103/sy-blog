@@ -15,11 +15,11 @@ const Header = () => {
                 </div>
             </div>
 
-            <div id="menu" className="flex justify-between items-center w-[50.2%] h-full mr-10" style={{fontFamily: 'DungGeunMo'}}>
+            <div id="menu" className="flex justify-between items-center w-[50.2%] h-full mr-10"
+                 style={{fontFamily: 'DungGeunMo'}}>
                 <span className="mx-14 text-lg font-bold">WORK</span>
+                <span className="mx-14 text-lg font-bold">PROFILE</span>
                 <span className="mx-14 text-lg font-bold">LOG</span>
-                <span className="mx-14 text-lg font-bold">BOOK</span>
-                <span className="mx-14 text-lg font-bold">MOVIE</span>
                 <span className="mx-14 text-lg font-bold">LIFE</span>
                 <span className="mx-14 text-lg font-bold">CONTACT</span>
             </div>
