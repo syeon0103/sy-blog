@@ -1,47 +1,52 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import {sliderCss} from "./Works.style.tsx";
-import MainImg from '../../assets/mainImg.jpg'
+import { sliderCss } from "./Works.style.tsx";
+import img1 from '../../assets/img/1.jpg';
+import img2 from '../../assets/img/2.jpg';
+import img3 from '../../assets/img/3.jpg';
+import img4 from '../../assets/img/4.jpg';
+import img5 from '../../assets/img/5.jpg';
+
+import { useState, useEffect, useRef } from "react";
 
 const Works = () => {
+    const imgList = [img1, img2, img3, img4, img5];
+    const [currentIndex, setCurrentIndex] = useState(2); // 초기 인덱스 설정
+    const sliderRef = useRef(null);
 
+    function prev() {
+        setCurrentIndex((prevIndex) => (prevIndex === 0 ? imgList.length - 1 : prevIndex - 1));
+    }
 
-    const settings = {
-        className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
-        speed: 500,
-        cssEase : 'linear',
-        dote : true
-    };
+    function next() {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % imgList.length);
+    }
+
+    useEffect(() => {
+        if (sliderRef.current) {
+            const slideWidth = 100 / imgList.length; // 각 이미지의 너비 비율
+            const offset = -((currentIndex - Math.floor(imgList.length / 2)) * slideWidth);
+            sliderRef.current.style.transform = `translateX(${offset}%)`;
+        }
+    }, [currentIndex]);
 
     return (
-
-        <div className="w-screen h-[1000px] border-b-2 border-b-black">
+        <div className="w-screen h-[750px] border-b-2 border-b-black">
             <div css={sliderCss}>
-                <div className="main">
-                <Slider {...settings} arrows={true} >
-                    <div>
-                        <img className="object-cover " src={MainImg} alt="testImg"/>
-                    </div>
-                    <div>
-                        <img className="w-full h-ull object-cover" src={MainImg} alt="testImg"/>
-                    </div>
-                    <div>
-                        <img className="w-full h-ull object-cover" src={MainImg} alt="testImg"/>
-                    </div>
-
-                </Slider>
+                <div className="workList" ref={sliderRef}>
+                    {imgList.map((img, index) => (
+                        <div
+                            className={`work ${index === currentIndex ? 'center-image' : ''}`}
+                            key={index}
+                        >
+                            <span className="font-semibold text-red-400">{index}</span>
+                            {/*  <img src={img} alt={`Image ${index}`} /> */}
+                        </div>
+                    ))}
                 </div>
-
             </div>
+            <button onClick={prev}>이전</button>
+            <button onClick={next}>다음</button>
         </div>
-    )
-
-
+    );
 }
 
 export default Works;
