@@ -29,7 +29,7 @@ const Works = () => {
     }, [currentIndex]);
 
     return (
-        <div className="w-screen h-[750px] border-b-2 border-b-black">
+        <div className="w-screen h-[40vw] border-b-4 border-b-black">
             <div css={sliderCss}>
                 <div className="workList" ref={sliderRef}>
                     {imgList.map((img, index) => (
@@ -38,7 +38,7 @@ const Works = () => {
                             key={index}
                         >
                             <span className="font-semibold text-red-400">{index}</span>
-                            {/*  <img src={img} alt={`Image ${index}`} /> */}
+                             {/*<img src={img} alt={`Image ${index}`} />*/}
                         </div>
                     ))}
                 </div>

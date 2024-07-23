@@ -4,6 +4,7 @@ export const sliderCss = css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; 
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -12,8 +13,9 @@ export const sliderCss = css`
         display: flex;
         flex-wrap: nowrap;
         justify-content: center;
-        margin-top: 50px;
+        align-items: center; 
         width: 100%;
+        height: 100%;
         position: relative;
         transition: transform 0.5s ease-in-out;
     }
@@ -22,11 +24,11 @@ export const sliderCss = css`
         flex: 0 0 auto;
         width: 550px;
         height: 550px;
-        margin: 0 80px;
+        margin: 0 150px;
         box-sizing: border-box;
         position: relative;
         border-radius: 20px;
-        border : 2px solid black;
+        border : 4px solid black;
 
         img {
             width: 100%;
@@ -39,8 +41,12 @@ export const sliderCss = css`
     .center-image {
         width: 600px;
         height: 600px;
-        transform: scale(1.1);
         z-index: 3;
+        transform: scale(1.1);
+       /* position: absolute; 
+        left: 50%; 
+        top: 50%; 
+        transform: translate(-50%, -50%) scale(1.1); */
     }
 
     .slide-left, .slide-right {
