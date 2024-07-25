@@ -38,7 +38,7 @@ const Works = () => {
                             key={index}
                         >
                             <span className="font-semibold text-red-400">{index}</span>
-                             {/*<img src={img} alt={`Image ${index}`} />*/}
+                             <img src={img} alt={`Image ${index}`} />
                         </div>
                     ))}
                 </div>
