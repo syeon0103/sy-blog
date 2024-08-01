@@ -30,7 +30,13 @@ const BoardWrite = () => {
     return (
         <>
             <Header/>
-            <div className="w-full h-screen flex items-center justify-center border-2 border-black">
+            <div className="w-full h-screen flex flex-col items-center justify-center border-2 border-black">
+
+                <div className="mb-20 mt-20 ">
+                    <span>제목을 입력하세요</span>
+
+                </div>
+
                 <div css={editorCss}>
                     <Editor
                         modules={modules}
