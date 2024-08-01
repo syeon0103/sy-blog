@@ -4,6 +4,7 @@ import Profile from './pages/ProfilePage.tsx'
 import Log from './pages/LogPage.tsx'
 import Life from './pages/LifePage.tsx'
 import Contact from './pages/ContactPage.tsx'
+import BoardWrite from "./pages/BoardWrite.tsx";
 
 import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
         path : "/contact",
         element : <Contact/>
     },
+    {
+        path : "/boardWrite",
+        element : <BoardWrite/>
+    }
 ])
 
 

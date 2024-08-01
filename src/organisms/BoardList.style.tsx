@@ -1,15 +1,20 @@
 import { css } from '@emotion/react';
 
 export const lineCss = css`
-    
+
     .line {
-        width: 50px;
-        border: 1px solid pink; 
-        transition: width 500ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        stroke-dasharray: 711; 
+        stroke-dashoffset: 711;
+        animation: dash 1.3s linear alternate infinite;
     }
 
-    div:hover {
-        width:100%;
+    @keyframes dash {
+        0% {
+            stroke-dashoffset: 711;
+        }
+        100% {
+            stroke-dashoffset: 0;
+        }
     }
 
 

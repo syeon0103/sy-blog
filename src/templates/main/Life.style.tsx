@@ -203,7 +203,6 @@ export const catCss = css`
         }
 
         // Glare on the pupil
-
         &::after {
             content: '';
             position: absolute;

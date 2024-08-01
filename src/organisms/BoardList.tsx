@@ -10,9 +10,6 @@ import {lineCss} from "./BoardList.style.tsx";
 const BoardList = () => {
 
     const imgList = [img1, img2, img3, img4, img5];
-   // const imgList = Array.from({length: 5}, (_, index) => `${url}/img/${index + 1}.jpg`);
-
-    console.log(imgList)
 
     function onHover() {
         return undefined;
@@ -37,6 +34,9 @@ const BoardList = () => {
 
                 <div id="bordList" className="flex flex-row mt-40 ml-32">
                     {imgList.map((img, index) => (
+
+
+                      <Link to={'/boardWrite'}>
                         <motion.div
                             whileHover={{scale: 1.1, filter: onHover()}}
                             animate={{y: -70}}
@@ -53,7 +53,7 @@ const BoardList = () => {
                                 </div>
                             </div>
                         </motion.div>
-
+                      </Link>
 
                     ))}
                 </div>
