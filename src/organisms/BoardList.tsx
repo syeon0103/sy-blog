@@ -32,16 +32,15 @@ const BoardList = () => {
                     </motion.div>
                 </div>
 
-                <div id="bordList" className="flex flex-row mt-40 ml-32">
+                <div id="bordList" className="w-full flex flex-wrap mt-40 ml-32">
                     {imgList.map((img, index) => (
-
 
                       <Link to={'/boardWrite'}>
                         <motion.div
                             whileHover={{scale: 1.1, filter: onHover()}}
                             animate={{y: -70}}
                             transition={{ease: "easeOut", duration: 2}}
-                            className="relative w-96 h-96 mr-20 border-4 border-primary rounded-lg shadow-lg overflow-hidden"
+                            className="relative w-96 h-96 mr-20 mb-20 border-4 border-primary rounded-lg shadow-lg overflow-hidden"
                         >
                             <img src={img} alt="boardImg"
                                  className="w-full h-full object-cover filter:blur-lg transition duration-500 ease-in-out transform hover:scale-105"/>

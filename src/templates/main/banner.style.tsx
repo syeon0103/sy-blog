@@ -2,16 +2,13 @@ import { css } from '@emotion/react';
 
 export const bannerCss = css`
     @keyframes marquee {
-        100% {
-            transform: translateX(100%);
-        }
-        0% {
+        to {
             transform: translateX(-100%);
         }
     }
 
     .animate-marquee {
-        animation: marquee 300s linear infinite;
+        animation: marquee 200s linear infinite;
         white-space: pre;
         font-size: 13px;
         color: #0E0C0C;
