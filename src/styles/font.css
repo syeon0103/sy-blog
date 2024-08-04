@@ -12,3 +12,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'nanumgothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CoreDream';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

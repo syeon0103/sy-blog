@@ -5,20 +5,40 @@ import img4 from '../assets/img/4.jpg';
 import img5 from '../assets/img/5.jpg';
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
-import {lineCss} from "./BoardList.style.tsx";
+import {imgCss} from "./BoardList.style.tsx";
+import {useEffect, useState} from "react";
+import {collection, getDocs} from "firebase/firestore";
+import {db} from "../firebase";
 
 const BoardList = () => {
 
     const imgList = [img1, img2, img3, img4, img5];
+    const [posts , setPosts] = useState<any[]>([])
 
-    function onHover() {
-        return undefined;
-    }
+    useEffect(() => {
+
+        const fetchPosts = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'posts'));
+                const postsData = querySnapshot.docs.map(doc => ({
+                    id : doc.id,
+                    ...doc.data()
+                }));
+                console.log(postsData);
+                setPosts(postsData);
+            } catch (error) {
+                console.log("에러남:::" , error);
+            }
+        }
+
+        fetchPosts();
+    }, []);
+
 
     return (
         <>
-            <div className="w-full h-[1500px] border-4 border-black">
-                <div id="titleArea" className="w-full h-20 mt-10 ml-20">
+            <div className="w-full h-[1500px] border-t-2 border-black">
+                <div id="titleArea" className="h-20 mt-10 ml-20">
                     <motion.div animate={{y: -20}}
                                 transition={{ease: "easeOut", duration: 2}}>
                         <svg width="400" height="140" viewBox="0 0 600 140">
@@ -32,36 +52,51 @@ const BoardList = () => {
                     </motion.div>
                 </div>
 
-                <div id="bordList" className="w-full flex flex-wrap mt-40 ml-32">
-                    {imgList.map((img, index) => (
+                <div className="mt-10 mr-10 items-end justify-end flex ">
+                    <motion.button
+                        initial={{opacity: 0.6}}
+                        whileHover={{
+                            transition: {duration: 1},
+                        }}
+                        whileTap={{scale: 0.8}}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                        whileInView={{opacity: 1}}
+                    >
+                        <Link to={'/boardWrite'}>
+                        <button  className="w-20 h-12 border-2 border-primary rounded-md shadow-md">
+                            <p className="font-semibold text-base hover:text-primary"
+                               style={{fontFamily: 'CoreDream'}}>글쓰기</p>
+                        </button>
+                        </Link>
+                    </motion.button>
 
-                      <Link to={'/boardWrite'}>
+                </div>
+
+                <div id="bordList" className=" flex flex-wrap mt-40 ml-32">
+                    {posts.map((post, index) => (
+
                         <motion.div
-                            whileHover={{scale: 1.1, filter: onHover()}}
-                            animate={{y: -70}}
-                            transition={{ease: "easeOut", duration: 2}}
-                            className="relative w-96 h-96 mr-20 mb-20 border-4 border-primary rounded-lg shadow-lg overflow-hidden"
+                            whileHover={{ scale: 1.1}}
+                            transition={{ type: 'ease', stiffness: 300 }}
+                            className="relative w-72 h-72 mr-20 mb-20 border-4 border-primary rounded-lg shadow-lg overflow-hidden"
                         >
-                            <img src={img} alt="boardImg"
-                                 className="w-full h-full object-cover filter:blur-lg transition duration-500 ease-in-out transform hover:scale-105"/>
+                            <Link to={`/boardDetail/${post.id}`} key={post.id}>
+
+                            <img src={imgList[index % imgList.length]} alt="boardImg"
+                                 className=" w-full h-full object-cover "/>
+
                             <div
-                                className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-center opacity-0 hover:opacity-100 transition duration-500 ease-in-out">
-                                <div className="bg-white bg-opacity-75 p-4 rounded-lg">
-                                    <h3 className="text-xl font-bold mb-2">title</h3>
-                                    <p>desc</p>
+                                className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-center opacity-0 hover:opacity-100 ">
+                                <div className="text-white p-4 rounded-lg" style={{fontFamily: 'DungGeunMo'}}>
+                                    <h3 className=" text-xl font-bold mb-2">{post.title}</h3>
+                                    <p>{post.subTitle}</p>
                                 </div>
                             </div>
+                            </Link>
                         </motion.div>
-                      </Link>
-
                     ))}
                 </div>
 
-                <div css={lineCss}>
-                    <div className="line">
-
-                    </div>
-                </div>
 
             </div>
 

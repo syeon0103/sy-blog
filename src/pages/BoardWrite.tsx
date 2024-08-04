@@ -4,18 +4,52 @@ import 'react-quill/dist/quill.snow.css'
 import {useEffect, useRef, useState} from "react";
 import {editorCss} from "./BoardWrite.style.tsx";
 import { motion} from "framer-motion";
+import {db} from '../firebase'
+import { doc, getDocs, addDoc, setDoc , collection } from 'firebase/firestore';
+import { useNavigate} from 'react-router-dom';
 
 const BoardWrite = () => {
 
+    const navigate = useNavigate(); // 훅 사용을 위해 여기서 초기화 사용자가 직접 클릭할 게 아니라면 그냥 네비게이트 사용
+
     const [editorHtml , setEditorHtml] = useState<string>('');
     const editorRef = useRef<Editor>(null);
-    const [value, setValue] = useState("<div>何度でも絶対君と出会う</div>");
+
+    const [title, setTitle] = useState<string>('')
+    const [subTitle, setSubTitle] = useState<string>('')
+    const [editorContent, setEditorContent] = useState<string>('')
+
+    const save = async () => {
+
+        try {
+            const docRef = await addDoc(collection(db, 'posts'), {
+                title,
+                subTitle,
+                content : editorHtml,
+                timestamp : new Date(),
+            });
+
+            console.log("성공", docRef.id)
+
+            setTitle('')
+            setSubTitle('')
+            setEditorHtml('')
+
+            navigate('/life')
+
+        } catch (error) {
+            console.log("error", error)
+        } finally {
+
+        }
+
+    }
 
     const handleChange = (value : string )=> {
         setEditorHtml(value);
     }
 
-    const checkEditorContent = () => {
+    const setPlaceHolder = () => {
 
         const editor = editorRef.current.getEditor();
         const container = editor.root;
@@ -25,9 +59,8 @@ const BoardWrite = () => {
     }
 
     useEffect(() => {
-
-        checkEditorContent();
-
+        console.log(db)
+        setPlaceHolder();
     }, [editorHtml]);
 
     const modules = {
@@ -42,11 +75,10 @@ const BoardWrite = () => {
         },
     }
 
-
     return (
         <>
             <Header/>
-            <div className="w-full flex flex-col items-center justify-center border-2 border-black">
+            <div className="w-full flex flex-col items-center justify-center border-t-2 border-black ">
 
                 <div className="">
                     <div className="mt-10 items-end justify-end flex ">
@@ -59,9 +91,9 @@ const BoardWrite = () => {
                             transition={{ type: 'spring', stiffness: 300 }}
                             whileInView={{opacity: 1}}
                         >
-                            <button className="w-20 h-12 border-2 border-primary rounded-md shadow-md">
+                            <button onClick={save} className="w-20 h-12 border-2 border-primary rounded-md shadow-md">
                                 <p className="font-semibold text-base hover:text-primary"
-                                   style={{fontFamily: 'DungGeunMo'}}>저장</p>
+                                   style={{fontFamily: 'nanumgothic'}}>저장</p>
                             </button>
                         </motion.button>
 
@@ -71,6 +103,8 @@ const BoardWrite = () => {
 
                     <div className="mt-20">
                         <input
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             type="text"
                             placeholder="제목을 입력하세요"
                             className="w-full p-2 text-2xl font-bold bg-transparent border-none outline-none"
@@ -80,10 +114,12 @@ const BoardWrite = () => {
 
                     <div className="mb-4 mt-2">
                         <input
+                            value={subTitle}
+                            onChange={(e) => setSubTitle(e.target.value)}
                             type="text"
                             placeholder="소제목을 입력하세요."
                             className="w-full p-2 text-lg font-normal text-gray-400 bg-transparent border-none outline-none"
-                            style={{fontFamily: 'HS-Regular'}}
+                            style={{fontFamily: 'nanumgothic'}}
                         />
                     </div>
 

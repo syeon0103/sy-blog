@@ -5,10 +5,12 @@ import Log from './pages/LogPage.tsx'
 import Life from './pages/LifePage.tsx'
 import Contact from './pages/ContactPage.tsx'
 import BoardWrite from "./pages/BoardWrite.tsx";
+import BoardDetail from "./pages/BoardDetail";
+import Splash from "./pages/Splash"
 
 import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+import {useEffect, useState} from "react";
 
 const router = createBrowserRouter([
   {
@@ -38,13 +40,31 @@ const router = createBrowserRouter([
     {
         path : "/boardWrite",
         element : <BoardWrite/>
+    },
+    {
+        path : "/boardDetail/:id",
+        element : <BoardDetail/>
     }
 ])
 
-
 function App() {
 
-    return <RouterProvider router={router}/>
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 5000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <>
+            {loading ? <Splash /> : <RouterProvider router={router} />}
+        </>
+
+        )
 
     /*  return (
           <Home/>
