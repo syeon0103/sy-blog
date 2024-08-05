@@ -1,14 +1,12 @@
 import { css } from '@emotion/react';
 
+
 export const msgCss = css`
     max-width: 1200px;
     width: 100%;
     display: flex;
     margin: 0 auto;
-    height: 100vh;
     flex-direction : column;
-    border-left: solid 3px #DBE4C9;
-    border-right:  solid 3px #DBE4C9;
     
     .chatBubble {
         width: 400px;
@@ -33,16 +31,23 @@ export const msgCss = css`
         margin-right: -38px;
     }
     
+`;
+
+export const chatInputCss = css`
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
     
     .chatContainer {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 1050px;
-        height: 60px;
-        position: fixed;
-        margin-bottom: 15px;
-        margin-left: 30px;
+        height: 60px; 
+        margin-top: 150px;
+       /* position: fixed; 포지션을 고정하면 다른 div 영역에도 영향을 줌 */ 
+        margin-bottom: 50px;
+        margin-left: 50px;
         bottom: 0;
     }
 
@@ -51,15 +56,15 @@ export const msgCss = css`
         margin-left: 100px;
         height: 100%;
         border-radius: 6px;
-        border: solid 2px #DBE4C9;
-        outline-color: #FE6B8B;
+        border: solid 2px #E1DCDB;
+        outline-color: #DBE4C9;
         padding: 20px;
         line-height: 22pt;
         font-size: 11pt;
         letter-spacing: .8px;
         color: rgba(0, 0, 0, 0.75);
     }
-    
+
     .bubble {
         width: 70px;
         height: 70px;
@@ -69,14 +74,13 @@ export const msgCss = css`
         align-items: center;
         justify-content: center;
         margin-left: 15px;
-        
+
         img {
             width: 45px;
-            
+
         }
-        
+
     }
     
-    
-    
+
 `;

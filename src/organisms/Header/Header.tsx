@@ -5,7 +5,7 @@ import {color, motion} from "framer-motion";
 
 const Header = () => {
     return (
-        <header id="header" className="w-screen h-28 top-0 left-0 min-h-28 overflow-hidden flex justify-between">
+        <header id="header" className=" h-28 top-0 left-0 min-h-28 overflow-hidden flex justify-between">
             <div id="headerLogo" className="flex ml-[4.87%] items-center w-[38.2%] h-full ">
                 <Link to={`/`}><img src={Logo} alt="logo" className="w-40 h-24"/></Link>
                 <div className="flex items-center w-72 h-20">
