@@ -26,6 +26,7 @@ export default {
           10: "#EFECEC",
           0: "#FAF9F9",
         },
+        'chat' : "#007AFF"
       },
     },
   },

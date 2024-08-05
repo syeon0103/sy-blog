@@ -4,19 +4,21 @@ import {wrapCss, splashCss, mentCss} from "./Splash.style";
 import {useEffect, useRef, useState} from "react";
 
 const Splash = () => {
-    const text = "weelcome to suyeon's blog"
+    const text = "welcome to suyeon's blog"
     const [loadingText, setLoadingText] = useState('');
     let index = useRef(0);
 
     useEffect(() => {
         const setIntroText  = setInterval(() => {
-            if(index.current < text.length) {
+
+            if (index.current < text.length) {
                 setLoadingText(prevText => prevText + text.charAt(index.current));
+                console.log(text.charAt(index.current))
                 index.current++;
             }
         }, 200);
         return () => {
-            console.log(setIntroText)
+
             clearInterval(setIntroText);
         };
 

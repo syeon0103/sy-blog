@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
 import {imgCss} from "./BoardList.style.tsx";
 import {useEffect, useState} from "react";
-import {collection, getDocs} from "firebase/firestore";
+import {collection, getDocs, orderBy, query} from "firebase/firestore";
 import {db} from "../firebase";
 
 const BoardList = () => {
@@ -19,7 +19,7 @@ const BoardList = () => {
 
         const fetchPosts = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'posts'));
+                const querySnapshot = await getDocs(query(collection(db, 'posts'), orderBy("timestamp", "desc")));
                 const postsData = querySnapshot.docs.map(doc => ({
                     id : doc.id,
                     ...doc.data()
@@ -37,7 +37,7 @@ const BoardList = () => {
 
     return (
         <>
-            <div className="w-full h-[1500px] border-t-2 border-black">
+            <div className="w-full border-t-2 border-black">
                 <div id="titleArea" className="h-20 mt-10 ml-20">
                     <motion.div animate={{y: -20}}
                                 transition={{ease: "easeOut", duration: 2}}>
