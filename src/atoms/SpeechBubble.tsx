@@ -47,7 +47,7 @@ export const bubbleCss = css`
         border-left-color: #DBE4C9;
         border-right: 0;
         border-top: 0;
-        margin-top: -15px;
+        margin-top: -11px;
         margin-right: -25px;
     }
 

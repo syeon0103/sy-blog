@@ -39,7 +39,7 @@ const ChatTitle = () => {
             >
 
                 <div className="w-72 h-14 shadow-lg mt-3 rounded-2xl bg-gray-50 flex items-center justify-center">
-                    <span className=" text-base font-normal" style={{fontFamily: 'CoreDream'}}>🧡뚜님이 입장했습니다🧡</span>
+                    <span className=" text-base font-normal" style={{fontFamily: 'CoreDream'}}>🧡수연님이 입장했습니다🧡</span>
                 </div>
             </motion.div>
         </div>
