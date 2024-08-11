@@ -6,7 +6,7 @@ const LogPage = () => {
     return (
         <>
             <Header/>
-
+            <BoardList/>
         </>
     )
 }

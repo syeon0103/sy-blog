@@ -2,7 +2,7 @@ import Home from './pages/Home/Home.tsx'
 import Work from './pages/WorkPage.tsx'
 import Profile from './pages/ProfilePage.tsx'
 import Log from './pages/LogPage.tsx'
-import Life from './pages/LifePage.tsx'
+import Review from './pages/Review.tsx'
 import Contact from './pages/ContactPage.tsx'
 import BoardWrite from "./pages/BoardWrite.tsx";
 import BoardDetail from "./pages/BoardDetail";
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
         element : <Profile/>
     },
     {
-        path : "/life",
-        element : <Life/>
+        path : "/review",
+        element : <Review/>
     },
     {
         path : "/contact",

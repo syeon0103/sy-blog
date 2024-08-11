@@ -46,7 +46,7 @@ const BoardList = () => {
                                 x="100" y="90" fill="#B3CCB0"
                                 font-size="100" font-family="'Leckerli One', cursive"
                                 rotate="4, 8, -8, -4, -20, -24, 48">
-                                Life
+                                Log
                             </text>
                         </svg>
                     </motion.div>

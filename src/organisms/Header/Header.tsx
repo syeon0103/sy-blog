@@ -30,7 +30,7 @@ const Header = () => {
                     <Link to={`/log`}><span className="mx-14 text-lg font-bold">LOG</span></Link>
                 </motion.div>
                 <motion.div whileHover={{scale: 1.2,  color: "#DBE4C9"}}>
-                    <Link to={`/life`}><span className="mx-14 text-lg font-bold">LIFE</span></Link>
+                    <Link to={`/review`}><span className="mx-14 text-lg font-bold">REVIEW</span></Link>
                 </motion.div>
                 <motion.div whileHover={{scale: 1.2,  color: "#DBE4C9"}}>
                     <Link to={`/contact`}><span className="mx-14 text-lg font-bold">CONTACT</span></Link>
