@@ -1,77 +1,68 @@
 import { css } from '@emotion/react';
-import {useEffect, useRef, useState} from "react";
+import { useState } from 'react';
 
 export const ratingCss = css`
     display: flex;
     cursor: pointer;
-    
-    .star {
-      font-size: 2rem;
-      color: lightgray;
-      transition: color 0.2s;
-      position: relative;
-      width: 30px;
-      height: 30px;
-    }
-    
-    .star.filled {
-      color: gold;
-    }
-    
-    .star.half {
-     color: gold;
-    }
-    
-    .star.half::before {
-      content: '★';
-      position: absolute;
-      top: 0;
-      left: 0;
-      color: gold;
-      width: 50%;
-      overflow: hidden;
-    }
-    
-`;
 
+    .star {
+        font-size: 1.2rem;
+        color: lightgray;
+        transition: color 0.2s;
+        position: relative;
+        width: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .star.filled {
+        color: #FE6B8B;
+    }
+
+    .star.half {
+        color: #FE6B8B;
+    }
+
+    .star.half::before {
+        content: '★';
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #FE6B8B;
+        width: 50%;
+        overflow: hidden;
+    }
+`;
 
 interface RatingProps {
     rating: number;
-    onRatingChange : (rating : number) => void;
+    onRatingChange: (rating: number) => void;
 }
 
-const Rating = ({rating, onRatingChange} : RatingProps) => {
-    const star = [1,2,3,4,5];
-    const [hoverRating, setHoverRating] = useState<number | null>(null)
-    const starRef = useRef(null);
-    const [starWidth, setStarWidth] = useState(0);
-    const starClick = (value : number) => {
+const Rating = ({ rating, onRatingChange }: RatingProps) => {
+    const stars = [1, 2, 3, 4, 5];
+    const [hoverRating, setHoverRating] = useState<number | null>(null);
+
+    const starClick = (value: number) => {
         onRatingChange(value);
-    }
+    };
 
-    const startMouseEnter = (value :number) => {
-        console.log("value" , value)
-
-
+    const startMouseEnter = (value: number) => {
         setHoverRating(value);
-    }
+    };
 
     const startMouseLeave = () => {
         setHoverRating(null);
-    }
+    };
 
-    //Nullish Coalescing Operator
-    //변수가 null 또는 undefined 일 때 기본값 제공
-    const renderStar = (value : number) => {
-
-        console.log("ratingValue", value)
-
-        const isFilled = value <= (hoverRating ?? rating/2);
-        const isHalf = value - 0.5 <= (hoverRating ?? rating) && value + 1 > (hoverRating ?? rating);
+    const renderStar = (value: number) => {
+        const currentRating = hoverRating ?? rating;
+        const isFilled = value <= currentRating;
+        const isHalf = value - 0.5 < currentRating && value >= currentRating;
 
         return (
             <span
-                ref={starRef}
                 key={value}
                 onClick={() => starClick(value)}
                 onMouseEnter={() => startMouseEnter(value)}
@@ -80,24 +71,14 @@ const Rating = ({rating, onRatingChange} : RatingProps) => {
             >
                 ★
             </span>
-        )
-
-    }
-
+        );
+    };
 
     return (
-        <>
-            <div css={ratingCss}>
-                {star.map(value => (
-                    renderStar(value)
-                ))}
-
-            </div>
-
-        </>
-    )
-
-
-}
+        <div css={ratingCss}>
+            {stars.map(value => renderStar(value))}
+        </div>
+    );
+};
 
 export default Rating;

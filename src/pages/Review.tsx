@@ -8,7 +8,7 @@ const Review = () => {
         <>
             <Header/>
             <ReviewList/>
-            <Confetti/>
+           {/* <Confetti/>*/}
 
         </>
     )

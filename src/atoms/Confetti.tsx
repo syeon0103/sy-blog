@@ -9,21 +9,19 @@ import img6 from "../assets/confetti/riize_6.png";
 import { useEffect, useState } from "react";
 
 const buttonContainer = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+   margin-top: 10px;
 `;
 
 const button = css`
     z-index: 10;
+    
     .clickBtn {
-        border: 2px solid #535bf2;
+        border: 2px solid #FE6B8B;
         border-radius: 3px;
         font-size: 20px;
         padding: 10px 20px;
         cursor: pointer;
-        background: #fff; /* 버튼의 배경색 추가 */
+        background: #fff; 
     }
 `;
 
@@ -56,10 +54,10 @@ const Confetti = () => {
             p.classList.add('particule');
             // p.x = window.innerWidth * 0.5;
             //  p.y = window.innerHeight + (Math.random() * window.innerHeight * 0.3);
-            p.x = buttonRect.width / 3;
-            p.y =  buttonRect.height / 5;
+            p.x = buttonRect.width / 2;
+            p.y =  buttonRect.height / 2;
             p.vel = {
-                x: (Math.random() - 0.5) * 10,
+                x: (Math.random() - 0.5) * 18,
                 y: Math.random() * -20 - 15
             };
             p.mass = Math.random() * 0.2 + 0.8;
@@ -107,7 +105,7 @@ const Confetti = () => {
         <div css={buttonContainer} className="buttonContainer">
             <div css={button}>
                 <button className="clickBtn" onClick={() => setTrigger(!trigger)}>
-                    {trigger ? '없애...' : '컨페티오픈..'}
+                    {trigger ? '🧡' : '🤍'}
                 </button>
             </div>
         </div>

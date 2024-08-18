@@ -7,6 +7,7 @@ import Contact from './pages/ContactPage.tsx'
 import BoardWrite from "./pages/BoardWrite.tsx";
 import BoardDetail from "./pages/BoardDetail";
 import Splash from "./pages/Splash"
+import ReviewDetail from "./pages/ReviewDetail.tsx"
 
 import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
     {
         path : "/boardDetail/:id",
         element : <BoardDetail/>
+    },
+    {
+        path : "/reviewDetail/:id",
+        element : <ReviewDetail/>
     }
 ])
 

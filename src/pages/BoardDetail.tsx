@@ -8,6 +8,7 @@ import {detailCss, contentCss} from "./BoardDetail.style";
 import { useNavigate} from 'react-router-dom';
 import Logo from '../assets/logo2.svg';
 import { motion} from "framer-motion";
+import Footer from "../organisms/Footer/Footer.tsx";
 
 const BoardDetail = () => {
 
@@ -95,23 +96,8 @@ const BoardDetail = () => {
                 </div>
             </div>
 
-        <div className="border-[1.5px] border-primary opacity-50 w-full mb-10"/>
 
-            <div className="flex items-center justify-center ">
-
-                <motion.div
-                    whileHover={{ scale: 1.1}} // 마우스 오버 시 애니메이션
-                    transition={{ type: 'spring', stiffness: 300 }}
-                    className="mb-10 w-72 h-20  flex items-center justify-center"
-                >
-                <Link to={`/Life`} className="flex items-center">
-                    <img src={Logo} alt="logo" className="w-30 h-24"/>
-               <div className="" style={{fontFamily: 'DungGeunMo'}} >Back to memories</div>
-                </Link>
-
-                </motion.div>
-            </div>
-
+              <Footer/>
 
         </div>
         </>
