@@ -26,7 +26,6 @@ export const ratingCss = css`
 
     .star.half::before {
         content: '★';
-        position: absolute;
         top: 0;
         left: 0;
         color: #FE6B8B;

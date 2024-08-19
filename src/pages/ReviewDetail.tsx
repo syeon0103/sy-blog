@@ -3,6 +3,8 @@ import Footer from "../organisms/Footer/Footer.tsx";
 import { useLocation } from "react-router-dom";
 import { css } from "@emotion/react";
 import Confetti from "../atoms/Confetti.tsx";
+import Rating from "../atoms/Rating.tsx";
+import { useState } from "react";
 
 const wrapCss = css`
     margin: 0 auto;
@@ -11,7 +13,7 @@ const wrapCss = css`
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-bottom: 4rem; /* 푸터 공간 확보 */
+    padding-bottom: 4rem;
 `;
 
 const backgroundCss = (bgImg) => css`
@@ -25,7 +27,7 @@ const backgroundCss = (bgImg) => css`
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    overflow: hidden; /* 내부 요소가 배경을 넘어가지 않도록 설정 */
+    overflow: hidden;
 
     &:before {
         content: '';
@@ -40,17 +42,30 @@ const backgroundCss = (bgImg) => css`
     }
 `;
 
-const containerCss = css`
-    position: absolute; /* 절대 위치로 배치 */
-    bottom: -10%; /* 하단 여백 */
+const diviCss = css`
+    position: absolute;
+    bottom: 0;
     left: 50%;
-    transform: translateX(-50%); /* 중앙 정렬 */
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: row; /* 기본적으로 가로 방향 */
-    gap: 1rem; /* 이미지와 텍스트 사이의 여백 */
-    align-items: flex-start; /* 위쪽에 정렬 */
-    width: 90%; /* 컨테이너 너비 조정 */
-    max-width: 1200px; /* 최대 너비 설정 */
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1200px;
+`;
+
+const containerCss = css`
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+    width: 90%;
+    max-width: 1200px;
 
     @media (max-width: 768px) {
         flex-direction: column; /* 화면이 좁아지면 세로 방향으로 변경 */
@@ -69,7 +84,7 @@ const textContainerCss = css`
     justify-content: center;
     color: black;
     margin-left: 1rem; /* 여백 조정 */
-    flex: 1; 
+    flex: 1;
 `;
 
 const titleCss = css`
@@ -83,22 +98,58 @@ const sectionCss = css`
     margin-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: normal;
-    font-family: 'nanumgothic', serif;
+    font-family: 'Pretendard-Regular', serif;
 `;
 
 const summaryCss = css`
     font-size: 1.1rem;
     font-weight: normal;
-    font-family: 'nanumgothic', serif;
+    font-family: 'Pretendard-Regular', serif;
+`;
+
+const starCss = css`
+    margin-top: 40px;
+
+    .star {
+        width : 30px;
+        font-size: 2.5rem;
+    }
 `;
 
 const confettiCss = css`
     margin-top: 40px;
 `;
 
+const movieTextContainerCss = css`
+    margin-bottom: -300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+   
+`;
 
+const movieTextBoxCss = css`
+    max-width: 4xl;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const movieTextTitleCss = css`
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+`;
+
+const movieTextContentCss = css`
+    font-size: 1rem;
+    color: gray;
+`;
 
 const ReviewDetail = () => {
+    const [rating, setRating] = useState<number>(0);
     const data = useLocation();
     const { review } = data.state || {};
 
@@ -108,36 +159,62 @@ const ReviewDetail = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <div className="w-full border-t-2 border-black">
                 <div css={wrapCss}>
-                    <div css={backgroundCss(review.bgImg)}>
+                    <div css={backgroundCss(review.bgImg)} />
+                    <div css={diviCss}>
+                        <div css={containerCss}>
+                            <div css={posterCss}>
+                                <img className="rounded-md shadow-md w-full h-full object-cover" src={review.img} alt="img" />
+                            </div>
+                            <div css={textContainerCss}>
+                                <div css={sectionCss}>
+                                    {review.section}
+                                </div>
+                                <div css={titleCss}>
+                                    {review.title}
+                                </div>
+                                <div css={summaryCss}>
+                                    {review.summary}
+                                </div>
+                                <div css={starCss}>
+                                    <Rating rating={review.star} onRatingChange={setRating} />
+                                </div>
+                                <div css={confettiCss}>
+                                    <Confetti />
+                                </div>
+                            </div>
+                        </div>
 
-                    </div>
-                    <div css={containerCss}>
-                        <div css={posterCss}>
-                            <img className="rounded-md shadow-md w-full h-full object-cover" src={review.img} alt="img"/>
+                    <div css={movieTextContainerCss}>
+                        <div css={movieTextBoxCss}>
+                            <div className="px-6 py-4">
+                                <div css={movieTextTitleCss}>Movie Text</div>
+                                <p css={movieTextContentCss}>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
+                                    nulla! Maiores et perferendis eaque, exercitationem praesentium nihil. Lorem ipsum
+                                    dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                                    perferendis eaque, exercitationem praesentium nihil. Lorem ipsum dolor sit amet,
+                                    consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque,
+                                    exercitationem praesentium nihil. Lorem ipsum dolor sit amet, consectetur adipisicing
+                                    elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
+                                    nihil. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
+                                    nulla! Maiores et perferendis eaque, exercitationem praesentium nihil. Lorem ipsum
+                                    dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                                    perferendis eaque, exercitationem praesentium nihil.
+                                </p>
+                            </div>
                         </div>
-                        <div css={textContainerCss}>
-                            <div css={sectionCss}>
-                                {review.section}
-                            </div>
-                            <div css={titleCss}>
-                                {review.title}
-                            </div>
-                            <div css={summaryCss}>
-                                {review.summary}
-                            </div>
-                            <div css={confettiCss}>
-                                <Confetti/>
-                            </div>
-                        </div>
                     </div>
+            </div>
+
+
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
-    )
-}
+    );
+};
 
 export default ReviewDetail;
