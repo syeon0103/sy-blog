@@ -66,7 +66,8 @@ function App() {
 
     return (
         <>
-            {loading ? <Splash /> : <RouterProvider router={router} />}
+            <RouterProvider router={router} />
+           {/* {loading ? <Splash /> : <RouterProvider router={router} />}*/}
         </>
 
         )
