@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import { css } from "@emotion/react";
 import Confetti from "../atoms/Confetti.tsx";
 import Rating from "../atoms/Rating.tsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import { motion} from "framer-motion";
 
 const wrapCss = css`
     margin: 0 auto;
@@ -82,7 +83,7 @@ const textContainerCss = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: black;
+    color: whitesmoke;
     margin-left: 1rem; /* 여백 조정 */
     flex: 1;
 `;
@@ -157,9 +158,21 @@ const ReviewDetail = () => {
         return <div>데이터가 없습니다.</div>;
     }
 
+    const [show, setShow] = useState(false);
+    useEffect(() => {
+        setShow(true);
+    }, []);
+
+
     return (
         <>
             <Header />
+            <motion.div
+                initial={{y: 50, opacity: 0}} // 초기 상태: 화면 아래에서 위로 이동 및 투명
+                animate={{y: show ? 0 : 50, opacity: show ? 1 : 0}} // 애니메이션 상태: 위로 이동 및 보임
+                transition={{duration: 1, ease: "easeOut"}} // 애니메이션 지속 시간과 easing
+                exit={{y: 50, opacity: 0}} // exit 애니메이션: 다시 아래로 이동 및 투명
+            >
             <div className="w-full border-t-2 border-black">
                 <div css={wrapCss}>
                     <div css={backgroundCss(review.bgImg)} />
@@ -212,6 +225,8 @@ const ReviewDetail = () => {
 
                 </div>
             </div>
+
+            </motion.div>
             <Footer />
         </>
     );

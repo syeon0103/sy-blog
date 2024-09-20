@@ -13,6 +13,7 @@ export default {
       colors: {
         primary: '#DBE4C9',
         secondary: '#B3CCB0',
+        main: '#5ea26a',
         grey: {
           100: "#0E0C0C",
           90: "#1C1817",
@@ -27,7 +28,9 @@ export default {
           0: "#FAF9F9",
         },
         'chat' : "#007AFF",
-        'charry' : "#FE6B8B"
+        'chatHover' : "#0060e0",
+        'charry' : "#FE6B8B",
+        'charryHover' : "#ff93aa"
       },
       fontFamily: {
         'seoyun': ['LeeSeoyun', 'sans-serif'],
