@@ -27,6 +27,7 @@ import { motion } from "framer-motion";
 import {bookCss} from "./book.style.tsx";
 import {bubbleCss, mainCss} from "./Home.style.tsx";
 import Keyword from "../../atoms/Keyword.tsx";
+import {Link} from "react-router-dom";
 
 const Home = () => {
 
@@ -137,28 +138,35 @@ const Home = () => {
                     <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>
                 </div>
 
-                <div className="flex w-full justify-center items-center">
-                    <div className="flex flex-col w-[600px]">
 
-                        <div className="flex">
+                <div className="flex w-full justify-center items-center ">
+                    <div className=" mt-10 flex flex-col w-[600px] ">
+
+                        <div className="flex ">
                             <button
                                 className="border-2 border-charry w-7 h-7 rounded-full flex items-center justify-center">
                                 <p className="font-pretendard text-xl text-charry text-center mt-1.5"> ^ </p>
                             </button>
 
-                            <div className="ml-3">
+                            <div className="ml-4">
                                 <span className="text-2xl text-charry font-pretendard">계절별</span>
                             </div>
                         </div>
 
-                        <div className="flex mt-5">
-                            <div className="w-0.5 h-12 bg-charry mx-3"></div>
-                            {keyword1.map((key, index) => (
-                                <Keyword title={key.title} icon={key.icon as string}/>
-                            ))}
+                        <div className="flex mt-5 ">
+                            <div
+                                className={`w-0.5 bg-charry mx-3 ${keyword1.length ? 'h-[calc(12rem+1rem*' + keyword1.length + ')]' : 'h-12'}`}></div>
+                            <div className="flex flex-wrap">
+                                {keyword1.map((key, index) => (
+                                    <div className="mb-3">
+                                        <Keyword key={index} title={key.title} icon={key.icon as string}/>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div className="flex w-full justify-center items-center ">
                     <div className=" mt-10 flex flex-col w-[600px] ">
@@ -177,55 +185,27 @@ const Home = () => {
                         <div className="flex mt-5 ">
                             <div
                                 className={`w-0.5 bg-charry mx-3 ${keyword2.length ? 'h-[calc(12rem+1rem*' + keyword2.length + ')]' : 'h-12'}`}></div>
-                                <div className="flex flex-wrap">
-                                    {keyword2.map((key, index) => (
-                                        <div className="mb-3">
-                                            <Keyword key={index} title={key.title} icon={key.icon as string}/>
-                                        </div>
-                                    ))}
-                                </div>
+                            <div className="flex flex-wrap">
+                                {keyword2.map((key, index) => (
+                                    <div className="mb-3">
+                                        <Keyword key={index} title={key.title} icon={key.icon as string}/>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
                 <div className="mt-10">
-                    <button type="submit" className=" rounded-full py-2 px-10 bg-gradient-to-b from-white to-charry border border-charry shadow-inner shadow-charryHover drop-shadow false">
-                        <span className="text-white font-pretendard text-base font-normal">스까묵기</span>
-                    </button>
+                    <Link to={`/playList`}>
+                        <button type="submit"
+                                className=" rounded-full py-2 px-10 bg-gradient-to-b from-white to-charry border border-charry shadow-inner shadow-charryHover drop-shadow false">
+                            <span className="text-white font-pretendard text-base font-normal">스까묵기</span>
+                        </button>
+                    </Link>
                 </div>
-
-
-
-                {/*<div css={bubbleCss}>
-                <div className="ball">
-                </div>
-                <div className="shadow"></div>
-            </div>*/}
-
-
-                {/*<div className="flex flex-row justify-center items-center mb-20">
-                <div className="grid grid-cols-3 gap-10 sm:grid-cols-1 md:grid-cols-2">
-                    {cardsData.map((card, index) => (
-                       <div css={bookCss}>
-                           <div className="book">
-                               <div className="book-cover" style={{backgroundImage: `url(${card.imageUrl})`}}>
-                                   <div className="effect"></div>
-                                   <div className="light"></div>
-                               </div>
-                               <div className="book-inside">
-                               </div>
-                           </div>
-                       </div>
-                    ))}
-                </div>
-            </div>*/}
-
-                {/* <Header/>
-            <Banner/>
-            <Works/>
-            <Log/>
-            <Life/>*/}
+ 
                 <div className="text-white font-pretendard mb-8 text-sm bottom-0 fixed sm:text-[7px]">
                     Copyright © 2024 뚜플리
                 </div>
