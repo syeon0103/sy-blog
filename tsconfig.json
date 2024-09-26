@@ -6,6 +6,11 @@
     },
     {
       "path": "./tsconfig.node.json"
-    }
-  ]
+    },
+
+  ],
+  "compilerOptions": {
+    // 다른 옵션들...
+    "types": ["axios"]
+  }
 }
