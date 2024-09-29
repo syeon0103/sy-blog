@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Auth from '../../api/Auth.tsx';
 import Vibrant from 'node-vibrant';
+import Book from "../../organisms/playList/Book.tsx";
 
 const PlayList = () => {
 
@@ -55,7 +56,7 @@ const PlayList = () => {
                 params: {
                     q: trackName,
                     type: 'track',
-                    limit: 2
+                    limit: 1
                 }
             });
             console.log("response.data.tracks.items::", response.data.tracks.items)
@@ -172,38 +173,43 @@ const PlayList = () => {
                     </div>
 
                     <div className="w-full ">
-                                <ul>
-                                    {tracks.map((track) => (
+                        <ul>
+                            {tracks.map((track) => (
 
-                                        <div  className="w-full rounded-2xl flex justify-center mb-8 " style={{
-                                            height: '600px',
-                                            backgroundColor:  `${mainColors[track.id]}80` || 'transparent'
-                                        }}>
-                                            <li key={track.id}>
+                                <div className="w-full rounded-2xl flex justify-center mb-8 " style={{
+                                    height: '600px',
+                                    backgroundColor: `${mainColors[track.id]}80` || 'transparent'
+                                }}>
+                                    <li key={track.id}>
 
-                                                <img src={track.album.images[0]?.url} alt={track.name} className="w-80 h-80 shadow-2xl rounded-2xl mt-10"
-                                                     onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
-                                                <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                                <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
+                                        <img src={track.album.images[0]?.url} alt={track.name}
+                                             className="w-80 h-80 shadow-2xl rounded-2xl mt-10"
+                                             onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
+                                        <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
+                                        <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
                                         <audio controls className="w-80 mt-3">
-                                        <source src={track.preview_url} type="audio/mpeg"/>
-                                </audio>
-                                                <div className="font-pretendard text-center mt-10">
-                                                    <a href={`https://open.spotify.com/track/${track.id}`}
-                                                       target="_blank"
-                                                       rel="noopener noreferrer"> 스포티파이에서 들어보세요!
-                                                    </a>
-                                                </div>
-
-                                            </li>
+                                            <source src={track.preview_url} type="audio/mpeg"/>
+                                        </audio>
+                                        <div className="font-pretendard text-center mt-10">
+                                            <a href={`https://open.spotify.com/track/${track.id}`}
+                                               target="_blank"
+                                               rel="noopener noreferrer"> 스포티파이에서 들어보세요!
+                                            </a>
                                         </div>
-                                    ))}
 
-                                </ul>
+                                    </li>
+                                </div>
+                            ))}
+
+                        </ul>
                     </div>
 
                 </>
             )}
+            <div className="mt-10 w-full">
+                 <Book/>
+            </div>
+
         </div>
     )
 }
