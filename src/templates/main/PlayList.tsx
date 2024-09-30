@@ -3,8 +3,107 @@ import axios from 'axios';
 import Auth from '../../api/Auth.tsx';
 import Vibrant from 'node-vibrant';
 import Book from "../../organisms/playList/Book.tsx";
+import musicIcon from '../../assets/icon/music.svg';
+import {useLocation} from "react-router-dom";
 
-const PlayList = () => {
+interface keyword {
+    key1? : string,
+    key2? : string,
+}
+
+
+const PlayList = ( ) => {
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const bookList = [];
+    const key1 = searchParams.get('keyword1') || '';
+    const key2 = searchParams.get('keyword2') || '';
+
+    const keywords: Keyword = {
+        key1,
+        key2,
+    };
+
+    const recommendList_1 = [
+        {
+            id: 1,
+            keyword : ['여름'],
+            book : ['바깥은 여름', '여름의 빌라'] ,
+            movie : ['백만엔걸 스즈코' , '괴물', '시간을 달리는 소녀'],
+            music : ['메모리즈', 'Be my next', '네가 내 마음에 자리 잡았다']
+        },
+        {
+            id: 2,
+            keyword: ['겨울'],
+            book : ['나주에 대하여', '쇼코의 미소'] ,
+            movie : ['눈이 부시게' , '쉰들러 리스트', '도깨비'],
+            music : ['소행성', 'wish you hell']
+        },
+    ]
+
+    const recommendList_2 = [
+        {
+            keyword : ['추천'],
+            book : ['종의 기원', '슬픔을 공부하는 슬픔'] ,
+            movie : ['인사이드 아웃2' , '엘리멘탈', '도깨비'],
+            music : ['재연', '붐붐베이스', 'love dive']
+        },
+
+        {
+            keyword: ['애매모호'],
+            book : ['아주 희미한 빛으로도', '눈부신 안부'] ,
+            movie : ['택시운전사' ],
+            music : ['조깅', '녹아내려요', 'saltwater']
+        }
+    ]
+
+    useEffect(() => {
+
+        const matchingKeyword = () => {
+
+
+            const keyword = recommendList_1.map(item => item.keyword);
+            console.log("keyword:::::::", keyword)
+            const keyword2 = recommendList_2.map(item => item.keywords);
+
+            for (const key of keyword) {
+                if (key == keywords.key1) {
+                    bookList.push({
+                        book: recommendList_1.map(item => item.book)
+                    });
+
+                }
+            }
+
+            for (const key of keyword2) {
+                if (key === keywords.key2) {
+                    bookList.push({
+                        book:  recommendList_2.map(item => item.book)
+                    });
+                }
+            }
+
+
+            /*
+             1. 키워드1 과 키워드2와 매칭되는 걸 찾는다.
+             2. musiclist와 booklist를 각각 만든다.
+             3. 매칭되는 키워드의 music과 book을 각 list에 push 해서 넣어준다
+             4. 해당 list를 검색 조건이 되게 music과 book api search에 보낸다
+             5. 검색창이 없어도 해당 키워드를 받아와 자동 검색된 데이터가 나오도록 한다.
+             */
+
+
+
+            console.log(keywords);
+        }
+
+        matchingKeyword();
+
+
+    }, [keywords]);
+
+
 
     const [token, setToken] = useState<string | null>(null);
     const [playlists, setPlaylists] = useState<any[]>([]);
@@ -33,9 +132,6 @@ const PlayList = () => {
     useEffect(() => {
         if (token) {
 
-            console.log("token:::" ,token)
-          //  fetchPlaylists(token);
-            console.log("token:::" ,token)
         }
     }, [token]);
 
@@ -168,8 +264,9 @@ const PlayList = () => {
             ) : (
 
                 <>
-                    <div className="font-pretendard text-3xl font-semibold">
-                        Music
+                    <div className="font-pretendard text-3xl font-semibold flex ">
+                     <img src={musicIcon} alt="musicIcon"  className="mr-2"/>
+                        <span>Music</span>
                     </div>
 
                     <div className="w-full ">
