@@ -28,14 +28,14 @@ const PlayList = ( ) => {
     const recommendList_1 = [
         {
             id: 1,
-            keyword : ['여름'],
+            keyword : '여름',
             book : ['바깥은 여름', '여름의 빌라'] ,
             movie : ['백만엔걸 스즈코' , '괴물', '시간을 달리는 소녀'],
             music : ['메모리즈', 'Be my next', '네가 내 마음에 자리 잡았다']
         },
         {
             id: 2,
-            keyword: ['겨울'],
+            keyword: '겨울',
             book : ['나주에 대하여', '쇼코의 미소'] ,
             movie : ['눈이 부시게' , '쉰들러 리스트', '도깨비'],
             music : ['소행성', 'wish you hell']
@@ -44,14 +44,14 @@ const PlayList = ( ) => {
 
     const recommendList_2 = [
         {
-            keyword : ['추천'],
+            keyword : '추천',
             book : ['종의 기원', '슬픔을 공부하는 슬픔'] ,
             movie : ['인사이드 아웃2' , '엘리멘탈', '도깨비'],
             music : ['재연', '붐붐베이스', 'love dive']
         },
 
         {
-            keyword: ['애매모호'],
+            keyword: '애매모호',
             book : ['아주 희미한 빛으로도', '눈부신 안부'] ,
             movie : ['택시운전사' ],
             music : ['조깅', '녹아내려요', 'saltwater']
@@ -64,39 +64,25 @@ const PlayList = ( ) => {
 
 
             const keyword = recommendList_1.map(item => item.keyword);
-            console.log("keyword:::::::", keyword)
-            const keyword2 = recommendList_2.map(item => item.keywords);
+            const keyword2 = recommendList_2.map(item => item.keyword);
 
             for (const key of keyword) {
+                const filteredBooks = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
                 if (key == keywords.key1) {
-                    bookList.push({
-                        book: recommendList_1.map(item => item.book)
-                    });
+                    bookList.push(...filteredBooks);
 
                 }
             }
 
             for (const key of keyword2) {
                 if (key === keywords.key2) {
-                    bookList.push({
-                        book:  recommendList_2.map(item => item.book)
-                    });
+                    const filteredBooks = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
+                    bookList.push(...filteredBooks);
                 }
             }
 
-
-            /*
-             1. 키워드1 과 키워드2와 매칭되는 걸 찾는다.
-             2. musiclist와 booklist를 각각 만든다.
-             3. 매칭되는 키워드의 music과 book을 각 list에 push 해서 넣어준다
-             4. 해당 list를 검색 조건이 되게 music과 book api search에 보낸다
-             5. 검색창이 없어도 해당 키워드를 받아와 자동 검색된 데이터가 나오도록 한다.
-             */
-
-
-
-            console.log(keywords);
         }
+
 
         matchingKeyword();
 
@@ -304,7 +290,7 @@ const PlayList = ( ) => {
                 </>
             )}
             <div className="mt-10 w-full">
-                 <Book/>
+                 <Book list={bookList}/>
             </div>
 
         </div>

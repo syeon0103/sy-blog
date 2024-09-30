@@ -1,12 +1,29 @@
 import {query} from "firebase/firestore";
 import axios from "axios";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import bookImg2 from '../../assets/book/book_2.jpg'
 import Vibrant from "node-vibrant";
 import bookIcon from '../../assets/icon/book.svg';
 
+interface bookList {
+    list : []
+}
 
-const Book = () => {
+const Book = ({list} : bookList) => {
+
+    console.log("bookList22222:::::::::::" , list.flat())
+
+    const flatBookList = list.flat();
+
+    function getRandomBook(bookList) {
+        if (flatBookList.length === 0) return null;
+        const randomIndex = Math.floor(Math.random() * bookList.length);
+        return bookList[randomIndex];
+    }
+
+    const randomBook = getRandomBook(flatBookList);
+    console.log("randomBook:::" + randomBook);
+
 
     // apiKey = '979ee0336ac09636798513b997594252';
     const apiKey = 'Ek6N4Gf6XvrIXJVQ707K';
@@ -51,6 +68,11 @@ const Book = () => {
         };
     };
 
+    useEffect(() => {
+        handleSearch();
+    }, [randomBook]);
+
+
     const getBooks = async (query : string ) => {
 
         try {
@@ -86,9 +108,10 @@ const Book = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
+
         setLoading(true);
         try {
-            const data = await getBooks(query);
+            const data = await getBooks(randomBook);
             console.log("data.documents:::" , data.items)
             setBookData(data.items);
         } catch (error) {
@@ -97,8 +120,6 @@ const Book = () => {
             setLoading(false);
         }
     };
-
-
 
     return (
 
@@ -131,15 +152,14 @@ const Book = () => {
                                             className="text-center mb-4 flex flex-col items-center">
 
                                             <div className="w-60 h-80 ">
-                                                <img src={book.image} alt="book2"
-                                                     className=" shadow-2xl rounded-2xl mt-10 object-cover"
-                                                     onLoad={() => getMainColor(book.image, book.isbn)}/>
+                                                <a href={book.link} target="_blank" rel="noopener noreferrer">
+                                                    <img src={book.image} alt="book2"
+                                                         className=" shadow-2xl rounded-2xl mt-10 object-cover"
+                                                         onLoad={() => getMainColor(book.image, book.isbn)}/></a>
                                             </div>
 
                                             <p className="font-pretendard text-2xl text-center mt-24 font-semibold">{book.title}</p>
                                             <p className="font-pretendard text-lg text-center mt-3">{book.author}</p>
-                                            <p className="font-pretendard text-base font-light mt-4">
-                                                <a href={book.link} target="_blank" rel="noopener noreferrer">자세히 보기</a></p>
 
                                         </li>
 
