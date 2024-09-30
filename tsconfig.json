@@ -6,7 +6,11 @@
     },
     {
       "path": "./tsconfig.node.json"
-    }
+    },
+
   ],
-  "jsxImportSource": "@emotion/react"
+  "compilerOptions": {
+    // 다른 옵션들...
+    "types": ["axios"]
+  }
 }

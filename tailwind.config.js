@@ -13,6 +13,7 @@ export default {
       colors: {
         primary: '#DBE4C9',
         secondary: '#B3CCB0',
+        main: '#5ea26a',
         grey: {
           100: "#0E0C0C",
           90: "#1C1817",
@@ -26,6 +27,21 @@ export default {
           10: "#EFECEC",
           0: "#FAF9F9",
         },
+        'chat' : "#007AFF",
+        'chatHover' : "#0060e0",
+        'charry' : "#FE6B8B",
+        'charryHover' : "#ff93aa"
+      },
+      fontFamily: {
+        'seoyun': ['LeeSeoyun', 'sans-serif'],
+        'pretendard': ['Pretendard-Regular', 'sans-serif'],
+      },
+      screens: {
+        sm: { min: "23.438rem", max: "47.9375rem" },
+        md: { min: "48rem", max: "63.9375rem" },
+        lg: { min: "64rem", max: "79.9375rem" },
+        xl: { min: "80rem", max: "95.9375rem" },
+        '2xl': { min: "96rem" },
       },
     },
   },
