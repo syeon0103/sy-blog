@@ -279,54 +279,71 @@ const PlayList = ( ) => {
     };*/
 
     return (
-        <div className="bg-[#e9e8ed] w-full min-h-screen flex flex-col items-center gap-5 p-3">
+        <div className="bg-[#e9e8ed] min-h-screen flex flex-col items-center gap-5 p-3">
+
+            <div className="flex flex-row  sm:flex-col  md:flex-col ">
 
 
-            <div className="font-pretendard text-3xl font-semibold flex mt-10 ">
-                <img src={musicIcon} alt="musicIcon" className="mr-2"/>
-                <span>Music</span>
-            </div>
+                <div className="px-4">
 
-            <div className=" w-full justify-center flex">
-                <ul>
-                    {tracks.map((track) => (
+                    <div className="font-pretendard text-3xl font-semibold flex flex-row   justify-center mt-10 mb-8 ">
+                        <img src={musicIcon as string} alt="musicIcon" className="mr-2"/>
+                        <span>Music</span>
+                    </div>
 
-                        <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
-                            height: '400px',
-                            backgroundColor: `${mainColors[track.id]}80` || 'transparent'
-                        }}>
-                            <li key={track.id}>
+                    <div className=" w-full justify-center flex">
+                        <ul>
+                            {tracks.map((track) => (
 
-                                <img src={track.album.images[0]?.url} alt={track.name}
-                                     className="w-40 h-40 shadow-2xl rounded-2xl mt-10"
-                                     onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
-                                <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
-                                <audio controls className="w-80 mt-3">
-                                    <source src={track.preview_url} type="audio/mpeg"/>
-                                </audio>
-                                <div className="font-pretendard text-center mt-10">
-                                    <a href={`https://open.spotify.com/track/${track.id}`}
-                                       target="_blank"
-                                       rel="noopener noreferrer"> 스포티파이에서 들어보세요!
-                                    </a>
+                                <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
+                                    height: '400px',
+                                    backgroundColor: `${mainColors[track.id]}80` || 'transparent'
+                                }}>
+                                    <li key={track.id}>
+
+                                        <img src={track.album.images[0]?.url} alt={track.name}
+                                             className="w-40 h-40 shadow-2xl rounded-2xl mt-10 ml-20"
+                                             onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
+                                        <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
+                                        <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
+                                        <audio controls className="w-80 mt-3">
+                                            <source src={track.preview_url} type="audio/mpeg"/>
+                                        </audio>
+                                        <div className="font-pretendard text-center mt-6">
+                                            <a href={`https://open.spotify.com/track/${track.id}`}
+                                               target="_blank"
+                                               rel="noopener noreferrer"> 스포티파이에서 들어보세요!
+                                            </a>
+                                        </div>
+
+                                    </li>
                                 </div>
+                            ))}
 
-                            </li>
-                        </div>
-                    ))}
+                        </ul>
 
-                </ul>
+
+                    </div>
+
+
+                </div>
+
+
+                <div className="mt-10 w-full justify-center flex px-4">
+                    <Book list={bookList}/>
+                </div>
+
             </div>
 
-
-            <div className="mt-10 w-full justify-center flex">
-                <Book list={bookList}/>
-            </div>
 
             <div className="mt-10 w-full justify-center flex">
                 <Movie
                 />
+            </div>
+
+
+            <div className="text-white font-pretendard mt-30 text-sm bottom-0  sm:text-[7px]">
+                Copyright © 2024 뚜플리
             </div>
 
 

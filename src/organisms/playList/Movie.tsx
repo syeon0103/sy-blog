@@ -142,7 +142,7 @@ const Movie = () => {
                                          onLoad={() => getMainColor(getImgPath(movieData.poster_path), movieData.id)}/>
                                 </div>
 
-                                <p className="font-pretendard text-2xl text-center mt-28 font-semibold">{movieData.title}</p>
+                                <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{movieData.title}</p>
 
 
                             </li>
@@ -170,7 +170,7 @@ const Movie = () => {
                                              onLoad={() => getMainColor(getImgPath(prog.poster_path), prog.id)}/>
                                     </div>
 
-                                    <p className="font-pretendard text-2xl text-center mt-28 font-semibold">{prog.name}</p>
+                                    <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{prog.name}</p>
 
 
                                 </li>

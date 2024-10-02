@@ -156,7 +156,7 @@ const Book = ({list} : bookList) => {
                                                          onLoad={() => getMainColor(book.image, book.isbn)}/></a>
                                             </div>
 
-                                            <p className="font-pretendard text-2xl text-center mt-28 font-semibold">{book.title}</p>
+                                            <p className="font-pretendard text-2xl text-center mt-32 font-semibold">{book.title}</p>
                                             <p className="font-pretendard text-lg text-center mt-3">{book.author}</p>
 
                                         </li>
