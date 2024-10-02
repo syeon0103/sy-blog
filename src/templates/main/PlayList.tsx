@@ -5,6 +5,7 @@ import Vibrant from 'node-vibrant';
 import Book from "../../organisms/playList/Book.tsx";
 import musicIcon from '../../assets/icon/music.svg';
 import {useLocation} from "react-router-dom";
+import Movie from "../../organisms/playList/Movie.tsx";
 
 interface keyword {
     key1? : string,
@@ -16,7 +17,13 @@ const PlayList = ( ) => {
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
+
+    const token = location.state.token;
+
+    console.log("toklocation.state.tokenen:::::::::2313211312" , token)
+
     const bookList = [];
+    const musicList = [];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
@@ -62,14 +69,15 @@ const PlayList = ( ) => {
 
         const matchingKeyword = () => {
 
-
             const keyword = recommendList_1.map(item => item.keyword);
             const keyword2 = recommendList_2.map(item => item.keyword);
 
             for (const key of keyword) {
                 const filteredBooks = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
+                const filteredMusic = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
                 if (key == keywords.key1) {
                     bookList.push(...filteredBooks);
+                    musicList.push(...filteredMusic);
 
                 }
             }
@@ -77,9 +85,12 @@ const PlayList = ( ) => {
             for (const key of keyword2) {
                 if (key === keywords.key2) {
                     const filteredBooks = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
+                    const filteredMusic = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
                     bookList.push(...filteredBooks);
+                    musicList.push(...filteredMusic);
                 }
             }
+
 
         }
 
@@ -89,12 +100,39 @@ const PlayList = ( ) => {
 
     }, [keywords]);
 
+    const flatMusicList = musicList;
 
-
-    const [token, setToken] = useState<string | null>(null);
-    const [playlists, setPlaylists] = useState<any[]>([]);
+    let randomMusic =''
 
     useEffect(() => {
+
+       randomMusic = getRandomMusic(musicList.flat());
+
+        console.log("randomMusic:::", randomMusic)
+
+        function getRandomMusic(musicList) {
+            if (flatMusicList.length === 0) return null;
+            const randomIndex = Math.floor(Math.random() * musicList.length);
+            return musicList[randomIndex];
+        }
+
+
+        if(randomMusic) {
+            searchTrack(randomMusic, token);
+        }
+
+
+
+    }, []);
+
+
+
+
+
+
+    const [playlists, setPlaylists] = useState<any[]>([]);
+
+  /*  useEffect(() => {
         const hash = window.location.hash;
         console.log("hash:::" , hash)
 
@@ -119,7 +157,7 @@ const PlayList = ( ) => {
         if (token) {
 
         }
-    }, [token]);
+    }, [token]);*/
 
     const [trackName, setTrackName] = useState('');
     const [tracks, setTracks] = useState<any[]>([]);
@@ -130,13 +168,16 @@ const PlayList = ( ) => {
     };
 
     const searchTrack = async (trackName: string, token: string) => {
+
+        console.log('token:::' , token)
+
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 params: {
-                    q: trackName,
+                    q: randomMusic,
                     type: 'track',
                     limit: 1
                 }
@@ -240,58 +281,54 @@ const PlayList = ( ) => {
     return (
         <div className="bg-[#e9e8ed] w-full min-h-screen flex flex-col items-center gap-5 p-3">
 
-            <div>
-                <input type="text" value={trackName} onChange={handleInputChange} placeholder="Search for a track..."/>
-                <button onClick={() => handleSearch(trackName)}>Search</button>
+
+            <div className="font-pretendard text-3xl font-semibold flex mt-10 ">
+                <img src={musicIcon} alt="musicIcon" className="mr-2"/>
+                <span>Music</span>
             </div>
 
-            {!token ? (
-                <button onClick={Auth}>Login with Spotify</button>
-            ) : (
+            <div className=" w-full justify-center flex">
+                <ul>
+                    {tracks.map((track) => (
 
-                <>
-                    <div className="font-pretendard text-3xl font-semibold flex ">
-                     <img src={musicIcon} alt="musicIcon"  className="mr-2"/>
-                        <span>Music</span>
-                    </div>
+                        <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
+                            height: '400px',
+                            backgroundColor: `${mainColors[track.id]}80` || 'transparent'
+                        }}>
+                            <li key={track.id}>
 
-                    <div className="w-full ">
-                        <ul>
-                            {tracks.map((track) => (
-
-                                <div className="w-full rounded-2xl flex justify-center mb-8 " style={{
-                                    height: '600px',
-                                    backgroundColor: `${mainColors[track.id]}80` || 'transparent'
-                                }}>
-                                    <li key={track.id}>
-
-                                        <img src={track.album.images[0]?.url} alt={track.name}
-                                             className="w-80 h-80 shadow-2xl rounded-2xl mt-10"
-                                             onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
-                                        <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                        <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
-                                        <audio controls className="w-80 mt-3">
-                                            <source src={track.preview_url} type="audio/mpeg"/>
-                                        </audio>
-                                        <div className="font-pretendard text-center mt-10">
-                                            <a href={`https://open.spotify.com/track/${track.id}`}
-                                               target="_blank"
-                                               rel="noopener noreferrer"> 스포티파이에서 들어보세요!
-                                            </a>
-                                        </div>
-
-                                    </li>
+                                <img src={track.album.images[0]?.url} alt={track.name}
+                                     className="w-40 h-40 shadow-2xl rounded-2xl mt-10"
+                                     onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
+                                <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
+                                <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
+                                <audio controls className="w-80 mt-3">
+                                    <source src={track.preview_url} type="audio/mpeg"/>
+                                </audio>
+                                <div className="font-pretendard text-center mt-10">
+                                    <a href={`https://open.spotify.com/track/${track.id}`}
+                                       target="_blank"
+                                       rel="noopener noreferrer"> 스포티파이에서 들어보세요!
+                                    </a>
                                 </div>
-                            ))}
 
-                        </ul>
-                    </div>
+                            </li>
+                        </div>
+                    ))}
 
-                </>
-            )}
-            <div className="mt-10 w-full">
-                 <Book list={bookList}/>
+                </ul>
             </div>
+
+
+            <div className="mt-10 w-full justify-center flex">
+                <Book list={bookList}/>
+            </div>
+
+            <div className="mt-10 w-full justify-center flex">
+                <Movie
+                />
+            </div>
+
 
         </div>
     )
