@@ -19,7 +19,9 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "outDir": "./dist", // 출력 디렉토리
+    "declaration": true, // .d.ts 파일 생성
   },
   "include": ["src/**/*", "global.d.ts"],
   "exclude": [
