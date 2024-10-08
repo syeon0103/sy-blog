@@ -1,5 +1,5 @@
 
-import axios from "axios";
+import axios , {AxiosRequestConfig} from "axios";
 import  {useEffect, useState} from "react";
 import Vibrant from "node-vibrant";
 import bookIcon from '../../assets/icon/book.svg';
@@ -19,7 +19,7 @@ const Book = ({list} : bookList) => {
         return bookList[randomIndex];
     }
 
-    const randomBook = getRandomBook(flatBookList);
+    const randomBook : null | string = getRandomBook(flatBookList);
 
     // apiKey = '979ee0336ac09636798513b997594252';
     const apiKey = 'Ek6N4Gf6XvrIXJVQ707K';
@@ -68,26 +68,45 @@ const Book = ({list} : bookList) => {
     useEffect(() => {
 
         if(!isBookState) {
-            handleSearch();
+
+                handleSearch();
+
         }
 
 
     }, [randomBook]);
 
 
-    const getBooks = async (query : string ) => {
 
-        try {
+
+
+    const getBooks = async (query: string | null) => {
+
+        const config:  {
+            headers: { "X-Naver-Client-Id": string; "X-Naver-Client-Secret": string };
+            params: { query: string; display: number }
+        } = {
+            headers: {
+                'X-Naver-Client-Id': apiKey,
+                'X-Naver-Client-Secret': client_key,
+            },
+            params: { query: query as string, display: 1 },
+        };
+
+        const resp = await axios.get(`/api/v1/search/book.json`, config);
+        return resp.data;
+
+       /* try {
             const resp = await axios.get(`/api/v1/search/book.json` , {
                 headers : {
-                    'X-Naver-Client-Id': apiKey,
+                    'X-Naver-Client-Id' : apiKey,
                     'X-Naver-Client-Secret': client_key,
                 },
                 params: { query , display: 1},
             })
 
 
-           /* const resp = await axios.get(`https://dapi.kakao.com/v3/search/book` , {
+           /!* const resp = await axios.get(`https://dapi.kakao.com/v3/search/book` , {
                 headers : {
                     Authorization : `KakaoAK ${apiKey}`,
                 },
@@ -95,13 +114,13 @@ const Book = ({list} : bookList) => {
                     query : query ,
                     size : 1
                 }
-            })*/
+            })*!/
             return resp.data;
 
         } catch (error) {
             console.log("error:::" , error);
 
-        }
+        }*/
 
 
     }
@@ -111,6 +130,7 @@ const Book = ({list} : bookList) => {
 
     const handleSearch = async () => {
         setLoading(true);
+
         try {
             const data = await getBooks(randomBook);
             console.log("data.documents:::", data);
@@ -140,6 +160,12 @@ const Book = ({list} : bookList) => {
                     </div>
 
                     <div className="w-full ">
+
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+
+                            <div>
                               {bookData.map((book) => (
 
                                     <div className="w-[400px] rounded-2xl flex justify-center mb-8 " key={book} style={{
@@ -165,6 +191,10 @@ const Book = ({list} : bookList) => {
                                     </div>
 
                                 ))}
+
+                            </div>
+
+                        )}
                   </div>
              </div>
 

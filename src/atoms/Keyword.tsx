@@ -1,7 +1,7 @@
 
 interface KeywordProps  {
     title: string;
-    icon: React.ReactNode;
+    icon: string;
     isSelected: boolean;
 };
 

@@ -152,6 +152,14 @@ const movieTextContentCss = css`
 */
 
 const ReviewDetail = () => {
+
+
+    return(
+
+        <>
+        </>
+    )
+
   /*  const [rating, setRating] = useState<number>(0);
     const data = useLocation();
     const { review } = data.state || {};
