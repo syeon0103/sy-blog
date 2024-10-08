@@ -1,5 +1,5 @@
 
-import axios , {AxiosRequestConfig} from "axios";
+import axios  from "axios";
 import  {useEffect, useState} from "react";
 import Vibrant from "node-vibrant";
 import bookIcon from '../../assets/icon/book.svg';
