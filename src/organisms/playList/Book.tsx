@@ -5,7 +5,7 @@ import Vibrant from "node-vibrant";
 import bookIcon from '../../assets/icon/book.svg';
 
 interface bookList {
-    list : []
+    list: string[][];
 }
 
 const Book = ({list} : bookList) => {
