@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Auth from '../../api/Auth.tsx';
 import Vibrant from 'node-vibrant';
 import Book from "../../organisms/playList/Book.tsx";
 import musicIcon from '../../assets/icon/music.svg';
@@ -22,10 +21,9 @@ const PlayList = ( ) => {
 
     const token = location.state.token;
 
-    console.log("toklocation.state.tokenen:::::::::2313211312" , token)
 
-    const bookList = [];
-    const musicList = [];
+    const bookList: string[] = [];
+    const musicList: string[]  = [];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
@@ -287,9 +285,9 @@ const PlayList = ( ) => {
                 {/*    <div className="text-gray-700 font-normal font-pretendard sm:text-2xl md:text-2xl text-4xl ">
                     <p> 뚜플리</p>
                 </div>*/}
-                <img src={mainIcon} className="w-10 h-14 animate-bounce"/>
+                <img src={mainIcon as string} className="w-10 h-14 animate-bounce"/>
                 <span className="font-pretendard mx-8 text-3xl text-charry font-semibold">뚜플리</span>
-                <img src={mainIcon2} className="w-16 h-12 mt-16 animate-bounce"/>
+                <img src={mainIcon2 as string} className="w-16 h-12 mt-16 animate-bounce"/>
                 {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
             </div>
 
@@ -303,9 +301,9 @@ const PlayList = ( ) => {
                     </div>
 
                     <div className=" w-full justify-center flex">
-                        <ul>
-                            {tracks.map((track) => (
 
+                            {tracks.map((track) => (
+                                <ul key={track.id}>
                                 <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
                                     height: '400px',
                                     backgroundColor: `${mainColors[track.id]}80` || 'transparent'
@@ -329,9 +327,10 @@ const PlayList = ( ) => {
 
                                     </li>
                                 </div>
+                                </ul>
                             ))}
 
-                        </ul>
+
 
 
                     </div>
