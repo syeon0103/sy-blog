@@ -6,6 +6,14 @@ import {useEffect, useRef, useState} from "react";
 */
 
 const Splash = () => {
+
+
+
+    return(
+        <>
+        </>
+    )
+
    /* const text = "welcome to suyeon's blog"
     const [loadingText, setLoadingText] = useState('');
     let index = useRef(0);

@@ -11,7 +11,6 @@ import PlayList from "./templates/main/PlayList.tsx";
 
 import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {useEffect, useState} from "react";
 
 const router = createBrowserRouter([
   {

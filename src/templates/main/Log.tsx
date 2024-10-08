@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import {titleCss} from "./Log.style.tsx";
 
 const Log = () => {

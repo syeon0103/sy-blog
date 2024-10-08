@@ -1,3 +1,4 @@
+/*
 import { sliderCss } from "./Works.style.tsx";
 import img1 from '../../assets/img/1.jpg';
 import img2 from '../../assets/img/2.jpg';
@@ -6,6 +7,7 @@ import img4 from '../../assets/img/4.jpg';
 import img5 from '../../assets/img/5.jpg';
 
 import { useState, useEffect, useRef } from "react";
+*/
 
 const Works = () => {
   /*  const imgList = [img1, img2, img3, img4, img5];

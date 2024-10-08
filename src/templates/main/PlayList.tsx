@@ -22,10 +22,9 @@ const PlayList = ( ) => {
 
     const token = location.state.token;
 
-    console.log("toklocation.state.tokenen:::::::::2313211312" , token)
 
-    const bookList = [];
-    const musicList = [];
+    const bookList: string[] = [];
+    const musicList: string[]  = [];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 

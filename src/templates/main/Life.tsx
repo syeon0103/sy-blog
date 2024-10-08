@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import {catCss} from "./Life.style.tsx";
 
 const Life = () => {

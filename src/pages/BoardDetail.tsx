@@ -12,6 +12,12 @@ import Footer from "../organisms/Footer/Footer.tsx";*/
 
 const BoardDetail = () => {
 
+
+    return(
+        <>
+        </>
+    )
+
    /* const navigate = useNavigate();
     const { id } = useParams<{id : string}>();
     const [postData, setPostData] = useState<DocumentData | null>(null);

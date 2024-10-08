@@ -6,7 +6,9 @@ import {useEffect, useState} from "react";
 */
 
 
-const ChatInput = ({getBubbles}) => {
+const ChatInput = () => {
+
+    //{getBubbles}
   /*  const [show, setShow] = useState(false);
     const [content, setContent] = useState<string>('')
 

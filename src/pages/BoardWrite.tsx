@@ -11,6 +11,13 @@ import Logo from "../assets/logo2.svg";*/
 
 const BoardWrite = () => {
 
+
+
+    return(
+        <>
+        </>
+    )
+
    /* const navigate = useNavigate(); // 훅 사용을 위해 여기서 초기화 사용자가 직접 클릭할 게 아니라면 그냥 네비게이트 사용
 
     const [editorHtml , setEditorHtml] = useState<string>('');
