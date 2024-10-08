@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+/*import { css } from '@emotion/react';
 import img1 from "../assets/confetti/riize_1.png";
 import img2 from "../assets/confetti/riize_2.png";
 import img3 from "../assets/confetti/riize_3.png";
@@ -14,19 +14,19 @@ const buttonContainer = css`
 
 const button = css`
     z-index: 10;
-    
+
     .clickBtn {
         border: 2px solid #FE6B8B;
         border-radius: 3px;
         font-size: 20px;
         padding: 10px 20px;
         cursor: pointer;
-        background: #fff; 
+        background: #fff;
     }
-`;
+`;*/
 
 const Confetti = () => {
-    const imgList = [img1, img2, img3, img4, img5, img6];
+    /*const imgList = [img1, img2, img3, img4, img5, img6];
     const [trigger, setTrigger] = useState(false);
     let particles = [];
 
@@ -109,7 +109,7 @@ const Confetti = () => {
                 </button>
             </div>
         </div>
-    );
+    );*/
 };
 
 export default Confetti;

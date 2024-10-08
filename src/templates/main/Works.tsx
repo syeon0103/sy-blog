@@ -8,7 +8,7 @@ import img5 from '../../assets/img/5.jpg';
 import { useState, useEffect, useRef } from "react";
 
 const Works = () => {
-    const imgList = [img1, img2, img3, img4, img5];
+  /*  const imgList = [img1, img2, img3, img4, img5];
     const [currentIndex, setCurrentIndex] = useState(2); // 초기 인덱스 설정
     const sliderRef = useRef(null);
 
@@ -46,7 +46,7 @@ const Works = () => {
             <button onClick={prev}>이전</button>
             <button onClick={next}>다음</button>
         </div>
-    );
+    );*/
 }
 
 export default Works;

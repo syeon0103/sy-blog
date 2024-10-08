@@ -1,11 +1,13 @@
+/*
 import {chatInputCss} from "../organisms/ChatMsg.style.tsx";
 import {motion} from "framer-motion";
 import bubble from "../assets/icon/bubble.svg";
 import {useEffect, useState} from "react";
+*/
 
 
 const ChatInput = ({getBubbles}) => {
-    const [show, setShow] = useState(false);
+  /*  const [show, setShow] = useState(false);
     const [content, setContent] = useState<string>('')
 
     const addBubble = () => {
@@ -65,7 +67,7 @@ const ChatInput = ({getBubbles}) => {
             </motion.div>
         </div>
 
-    )
+    )*/
 
 
 }

@@ -6,6 +6,8 @@ import Book from "../../organisms/playList/Book.tsx";
 import musicIcon from '../../assets/icon/music.svg';
 import {useLocation} from "react-router-dom";
 import Movie from "../../organisms/playList/Movie.tsx";
+import mainIcon from "../../assets/icon1.svg";
+import mainIcon2 from "../../assets/icon2.svg";
 
 interface keyword {
     key1? : string,
@@ -281,8 +283,17 @@ const PlayList = ( ) => {
     return (
         <div className="bg-[#e9e8ed] min-h-screen flex flex-col items-center gap-5 p-3">
 
-            <div className="flex flex-row  sm:flex-col  md:flex-col ">
+            <div className="flex flex-row items-center justify-center">
+                {/*    <div className="text-gray-700 font-normal font-pretendard sm:text-2xl md:text-2xl text-4xl ">
+                    <p> 뚜플리</p>
+                </div>*/}
+                <img src={mainIcon} className="w-10 h-14 animate-bounce"/>
+                <span className="font-pretendard mx-8 text-3xl text-charry font-semibold">뚜플리</span>
+                <img src={mainIcon2} className="w-16 h-12 mt-16 animate-bounce"/>
+                {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
+            </div>
 
+            <div className="flex flex-row  sm:flex-col  md:flex-col">
 
                 <div className="px-4">
 

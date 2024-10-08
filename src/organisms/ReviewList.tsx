@@ -1,4 +1,4 @@
-import Rating from "../atoms/Rating";
+/*import Rating from "../atoms/Rating";
 import {useEffect, useState} from "react";
 import img1 from "../assets/movie/movie_1.jpg";
 import img2 from "../assets/movie/movie_2.jpg";
@@ -7,10 +7,10 @@ import img4 from "../assets/movie/movie_4.jpg";
 import bg4 from "../assets/movie/bg/bg_4.jpg"
 import bg2 from "../assets/movie/bg/bg_2.jpg"
 import { motion } from "framer-motion";
-import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";*/
 
 const ReviewList = () => {
-    const [rating, setRating] = useState<number>(0);
+   /* const [rating, setRating] = useState<number>(0);
     const [show, setShow] = useState(false);
 
     useEffect(() => {
@@ -111,7 +111,7 @@ const ReviewList = () => {
                 </div>
             </motion.div>
         </div>
-);
+);*/
 }
 
 export default ReviewList;

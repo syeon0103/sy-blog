@@ -1,18 +1,8 @@
 
 
-import Header from "../../organisms/Header/Header.tsx";
-import Banner from "../../templates/main/Banner.tsx"
-import Works from "../../templates/main/Works.tsx"
-import Life from "../../templates/main/Life.tsx"
-import Log from "../../templates/main/Log.tsx";
-import Lottie from 'lottie-react';
-import img1 from "../../assets/book_8.jpg";
-import flower from '../../assets/animation/bookmark.json'
-import { motion } from "framer-motion";
-
 const Home_back = () => {
 
-    const cardsData = new Array(8).fill({
+    /*const cardsData = new Array(8).fill({
         title: "대온실 수리 보고서",
         description: "Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.",
         imageUrl: img1,
@@ -82,16 +72,16 @@ const Home_back = () => {
                 </div>
             </div>
 
-            {/* <Header/>
+            {/!* <Header/>
             <Banner/>
             <Works/>
             <Log/>
-            <Life/>*/}
+            <Life/>*!/}
             <div className="text-white font-pretendard mb-8 text-sm">
                 Copyright © 2024 My lucky book list
             </div>
         </div>
-    )
+    )*/
 }
 
 

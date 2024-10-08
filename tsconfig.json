@@ -11,6 +11,15 @@
   ],
   "compilerOptions": {
     // 다른 옵션들...
-    "types": ["axios"]
-  }
+    "types": ["axios"],
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  },
+  "include": ["src/**/*", "global.d.ts"]
 }

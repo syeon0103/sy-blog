@@ -5,7 +5,7 @@ const ProfilePage = () => {
     return (
         <>
             <Header/>
-            <span>profileffffffffff</span>
+          {/*  <span>profileffffffffff</span>*/}
         </>
     )
 }

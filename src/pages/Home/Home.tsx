@@ -1,5 +1,4 @@
 
-import Lottie from 'lottie-react';
 import spring from '../../assets/icon/cherryBlossom.svg'
 import summer from '../../assets/icon/beach.svg'
 import fall from '../../assets/icon/leaf.svg'
@@ -11,9 +10,7 @@ import thinking from '../../assets/icon/thinkinh.svg'
 import mainIcon from '../../assets/icon1.svg'
 import mainIcon2 from '../../assets/icon2.svg'
 
-import book from '../../assets/animation/book.json'
-import { motion } from "framer-motion";
-import {bubbleCss, mainCss} from "./Home.style.tsx";
+import { mainCss} from "./Home.style.tsx";
 import Keyword from "../../atoms/Keyword.tsx";
 import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";

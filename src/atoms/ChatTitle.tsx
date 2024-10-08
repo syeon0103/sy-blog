@@ -1,9 +1,11 @@
+/*
 import {useEffect, useState} from "react";
 import { motion} from "framer-motion";
+*/
 
 
 const ChatTitle = () => {
-    const date = new Date();
+   /* const date = new Date();
     const formatter = new Intl.DateTimeFormat('ko-KR', {
         year: 'numeric',
         month: 'long',
@@ -43,7 +45,7 @@ const ChatTitle = () => {
                 </div>
             </motion.div>
         </div>
-)
+)*/
 
 
 }

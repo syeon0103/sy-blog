@@ -1,17 +1,6 @@
-import img1 from '../assets/img/1.jpg';
-import img2 from '../assets/img/2.jpg';
-import img3 from '../assets/img/3.jpg';
-import img4 from '../assets/img/4.jpg';
-import img5 from '../assets/img/5.jpg';
-import {Link} from "react-router-dom";
-import {motion} from "framer-motion";
-import {imgCss} from "./BoardList.style.tsx";
-import {useEffect, useState} from "react";
-import {collection, getDocs, orderBy, query} from "firebase/firestore";
-import {db} from "../firebase";
 
 const BoardList = () => {
-
+/*
     const imgList = [img1, img2, img3, img4, img5];
     const [posts , setPosts] = useState<any[]>([])
 
@@ -101,7 +90,7 @@ const BoardList = () => {
             </div>
 
         </>
-    )
+    )*/
 
 }
 
