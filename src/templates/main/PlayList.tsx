@@ -94,20 +94,27 @@ const PlayList = ( ) => {
 
     }, [keywords]);
 
-    const flatMusicList: string[]= musicList.flat();
+    console.log("musicList::::11111", musicList)
+
+    musicList.shift()
+
+  //  const flatMusicList= musicList.flat();
 
     let randomMusic: string | null =''
 
     useEffect(() => {
 
-       randomMusic = getRandomMusic(flatMusicList);
+     //  randomMusic = getRandomMusic(flatMusicList);
+
+       console.log("randomMusic::", randomMusic)
 
 
-        function getRandomMusic(musicList: string[]): string | null {
+       /* function getRandomMusic(musicList: string[]): string | null {
             if (flatMusicList.length === 0) return null;
             const randomIndex = Math.floor(Math.random() * musicList.length);
+
             return musicList[randomIndex];
-        }
+        }*/
 
 
         if(randomMusic) {
@@ -116,7 +123,7 @@ const PlayList = ( ) => {
 
 
 
-    }, [flatMusicList]);
+    }, []);
 
 
 
