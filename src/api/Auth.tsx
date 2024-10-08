@@ -1,7 +1,7 @@
 
 
 const clientId = 'b4d86e31fbdc4244a519de0df33e4488';
-const redirectUri = 'http://localhost:5173/';
+const redirectUri = 'https://sy-blog-vert.vercel.app/';
 const scopes = ['user-read-private', 'user-read-email', 'playlist-read-private'];
 
 
