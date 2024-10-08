@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Vibrant from 'node-vibrant';
 import Book from "../../organisms/playList/Book.tsx";
@@ -8,12 +8,6 @@ import Movie from "../../organisms/playList/Movie.tsx";
 import mainIcon from "../../assets/icon1.svg";
 import mainIcon2 from "../../assets/icon2.svg";
 
-interface keyword {
-    key1? : string,
-    key2? : string,
-}
-
-
 const PlayList = ( ) => {
 
     const location = useLocation();
@@ -22,12 +16,12 @@ const PlayList = ( ) => {
     const token = location.state.token;
 
 
-    const bookList: string[] = [];
-    const musicList: string[]  = [];
+    const bookList: string[][] = [[]];
+    const musicList: string[][]  = [[]];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
-    const keywords: Keyword = {
+    const keywords = {
         key1,
         key2,
     };
@@ -36,7 +30,7 @@ const PlayList = ( ) => {
         {
             id: 1,
             keyword : '여름',
-            book : ['바깥은 여름', '여름의 빌라'] ,
+            book : ['바깥은 여름', '여름의 빌라', '사바삼사라 서'] ,
             movie : ['백만엔걸 스즈코' , '괴물', '시간을 달리는 소녀'],
             music : ['메모리즈', 'Be my next', '네가 내 마음에 자리 잡았다']
         },
@@ -73,8 +67,8 @@ const PlayList = ( ) => {
             const keyword2 = recommendList_2.map(item => item.keyword);
 
             for (const key of keyword) {
-                const filteredBooks = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
-                const filteredMusic = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
+                const filteredBooks: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
+                const filteredMusic: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
                 if (key == keywords.key1) {
                     bookList.push(...filteredBooks);
                     musicList.push(...filteredMusic);
@@ -84,8 +78,8 @@ const PlayList = ( ) => {
 
             for (const key of keyword2) {
                 if (key === keywords.key2) {
-                    const filteredBooks = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
-                    const filteredMusic = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
+                    const filteredBooks: string[][] = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
+                    const filteredMusic: string[][]  = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
                     bookList.push(...filteredBooks);
                     musicList.push(...filteredMusic);
                 }
@@ -108,7 +102,6 @@ const PlayList = ( ) => {
 
        randomMusic = getRandomMusic(musicList.flat());
 
-        console.log("randomMusic:::", randomMusic)
 
         function getRandomMusic(musicList) {
             if (flatMusicList.length === 0) return null;
@@ -118,7 +111,7 @@ const PlayList = ( ) => {
 
 
         if(randomMusic) {
-            searchTrack(randomMusic, token);
+            searchTrack( token);
         }
 
 
@@ -130,7 +123,7 @@ const PlayList = ( ) => {
 
 
 
-    const [playlists, setPlaylists] = useState<any[]>([]);
+   // const [playlists, setPlaylists] = useState<any[]>([]);
 
   /*  useEffect(() => {
         const hash = window.location.hash;
@@ -159,17 +152,16 @@ const PlayList = ( ) => {
         }
     }, [token]);*/
 
-    const [trackName, setTrackName] = useState('');
+   // const [trackName, setTrackName] = useState<string>('');
     const [tracks, setTracks] = useState<any[]>([]);
     const [mainColors, setMainColors] = useState<{ [key: string]: string }>({})
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTrackName(e.target.value);
-    };
+    };*/
 
-    const searchTrack = async (trackName: string, token: string) => {
+    const searchTrack = async (token: string) => {
 
-        console.log('token:::' , token)
 
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search`, {
@@ -190,10 +182,10 @@ const PlayList = ( ) => {
         }
     };
 
-    const handleSearch = async (trackName: string) => {
+ /*   const handleSearch = async (trackName: string) => {
         const tracks = await searchTrack(trackName, token);
         // 결과를 UI에 업데이트
-    };
+    };*/
 
    /* const getMainColor = (imageUrl: string) => {
         const img = new Image();
@@ -314,7 +306,7 @@ const PlayList = ( ) => {
                                              className="w-40 h-40 shadow-2xl rounded-2xl mt-10 ml-20"
                                              onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
                                         <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                        <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
+                                       {/* <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>*/}
                                         <audio controls className="w-80 mt-3">
                                             <source src={track.preview_url} type="audio/mpeg"/>
                                         </audio>

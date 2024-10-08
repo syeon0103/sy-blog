@@ -3,6 +3,9 @@ import  {useEffect, useState} from "react";
 import axios from "axios";
 import Vibrant from "node-vibrant";
 
+interface Movie {
+    id: string;
+}
 
 const Movie = () => {
 
@@ -13,17 +16,17 @@ const Movie = () => {
 
     const searchMovies = async (query: string) => {
         const response = await axios.get(`${BASE_URL}/search/movie?api_key=${apiKey}&language=ko-KR&query=${encodeURIComponent(query)}`);
-        return response.data.results.length > 0 ? response.data.results[0]: null;
+        return response.data.results.length > 0 ? response.data.results: null;
     };
 
     const searchTVShows = async (query: string) => {
         const response = await axios.get(`${BASE_URL}/search/tv?api_key=${apiKey}&language=ko-KR&query=${encodeURIComponent(query)}`);
-        console.log("tv::::" , response.data.results)
+
         return response.data.results.length > 0 ? response.data.results : null;
     };
 
 
-    const [movieData, setMovieData] =  useState<string[]>([]);
+    const [movieData, setMovieData] =  useState<any[]>([]);
 
    // const [progList, setProgList] =useState<any[]>([]);
 
@@ -63,12 +66,10 @@ const Movie = () => {
 
 
     useEffect(() => {
-        console.log("영화::::::::::::", movieData);
-    }, [movieData]); // movieData가 업데이트될 때마다 실행
+    }, [movieData]);
 
     useEffect(() => {
-        console.log("tv::::::::::::", tvData);
-    }, [tvData]); // tvData가 업데이트될 때마다 실행
+    }, [tvData]);
 
 
 
@@ -128,27 +129,34 @@ const Movie = () => {
 
                     <div className="flex-1 px-4">
 
-                        <div className="w-[400px] rounded-2xl flex justify-center mb-8 " key={movieData[0]} style={{
-                            height: '400px',
-                            backgroundColor: `${mainColors[movieData.id as string ]}80` || 'transparent'
-                        }}>
 
-                            <li key={movieData.id  as string}
-                                className="text-center mb-4 flex flex-col items-center">
+                        {movieData.length > 0 && (
+                            <div className="w-[400px] rounded-2xl flex justify-center mb-8" key={movieData[0].id} style={{
+                                height: '400px',
+                                backgroundColor: `${mainColors[movieData[0].id]}80` || 'transparent'
+                            }}>
 
-                                <div className="w-40 h-40 ">
-                                    <img src={getImgPath(movieData.poster_path  as string)} alt="tv"
-                                         className=" shadow-2xl rounded-2xl mt-10 object-cover"
-                                         onLoad={() => getMainColor(getImgPath(movieData.poster_path  as string), movieData.id  as string)}/>
-                                </div>
+                                <li key={movieData[0].id }
+                                    className="text-center mb-4 flex flex-col items-center">
 
-                                <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{movieData.title  as string}</p>
+                                    <div className="w-40 h-40 ">
+                                        <img src={getImgPath(movieData[0].poster_path )} alt="tv"
+                                             className=" shadow-2xl rounded-2xl mt-10 object-cover"
+                                             onLoad={() => getMainColor(getImgPath(movieData[0].poster_path ), movieData[0].id)}/>
+                                    </div>
+
+                                    <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{movieData[0].title }</p>
 
 
-                            </li>
+                                </li>
 
 
-                        </div>
+                            </div>
+
+
+                        )}
+
+
                     </div>
 
 
