@@ -17,7 +17,7 @@ const PlayList = ( ) => {
 
 
     const bookList: string[][] = [[]];
-    //const musicList: string[][]  = [[]];
+    const musicList: string[][]  = [[]];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
@@ -68,10 +68,10 @@ const PlayList = ( ) => {
 
             for (const key of keyword) {
                 const filteredBooks: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
-              //  const filteredMusic: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
+                const filteredMusic: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
                 if (key == keywords.key1) {
                     bookList.push(...filteredBooks);
-                 //   musicList.push(...filteredMusic);
+                    musicList.push(...filteredMusic);
 
                 }
             }
@@ -79,9 +79,9 @@ const PlayList = ( ) => {
             for (const key of keyword2) {
                 if (key === keywords.key2) {
                     const filteredBooks: string[][] = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
-                 //   const filteredMusic: string[][]  = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
+                    const filteredMusic: string[][]  = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
                     bookList.push(...filteredBooks);
-                  //  musicList.push(...filteredMusic);
+                    musicList.push(...filteredMusic);
                 }
             }
 
@@ -94,36 +94,35 @@ const PlayList = ( ) => {
 
     }, [keywords]);
 
-  /*  console.log("musicList::::11111", musicList)
+    console.log("musicList::::11111", musicList)
 
-    musicList.shift()*/
+    const flatMusicList: string[]= musicList.flat();
 
-  //  const flatMusicList= musicList.flat();
-
-    //let randomMusic: string | null =''
+    let randomMusic: string | null =''
 
     useEffect(() => {
 
-     //  randomMusic = getRandomMusic(flatMusicList);
+       randomMusic = getRandomMusic(flatMusicList);
 
-     //  console.log("randomMusic::", randomMusic)
+       console.log("randomMusic::", randomMusic)
 
 
-       /* function getRandomMusic(musicList: string[]): string | null {
+        function getRandomMusic(musicList: string[]): string | null {
             if (flatMusicList.length === 0) return null;
+
             const randomIndex = Math.floor(Math.random() * musicList.length);
 
             return musicList[randomIndex];
-        }*/
+        }
 
 
-      /*  if(randomMusic) {
+        if(randomMusic) {
             searchTrack( token);
         }
-*/
 
 
-    }, []);
+
+    }, [flatMusicList]);
 
 
 
@@ -160,14 +159,14 @@ const PlayList = ( ) => {
     }, [token]);*/
 
    // const [trackName, setTrackName] = useState<string>('');
-    // [tracks, setTracks] = useState<any[]>([]);
-   const [mainColors, setMainColors] = useState<{ [key: string]: string }>({})
+    const [tracks, setTracks] = useState<any[]>([]);
+    const [mainColors, setMainColors] = useState<{ [key: string]: string }>({})
 
   /*  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTrackName(e.target.value);
     };*/
 
-/*    const searchTrack = async (token: string) => {
+    const searchTrack = async (token: string) => {
 
 
         try {
@@ -187,7 +186,7 @@ const PlayList = ( ) => {
         } catch (error) {
             console.error('Error searching track:', error);
         }
-    };*/
+    };
 
  /*   const handleSearch = async (trackName: string) => {
         const tracks = await searchTrack(trackName, token);
@@ -299,7 +298,7 @@ const PlayList = ( ) => {
                         <span>Music</span>
                     </div>
 
-                  {/*  <div className=" w-full justify-center flex">
+                    <div className=" w-full justify-center flex">
 
                             {tracks.map((track) => (
                                 <ul key={track.id}>
@@ -313,7 +312,7 @@ const PlayList = ( ) => {
                                              className="w-40 h-40 shadow-2xl rounded-2xl mt-10 ml-20"
                                              onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
                                         <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                        <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
+                                       {/* <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>*/}
                                         <audio controls className="w-80 mt-3">
                                             <source src={track.preview_url} type="audio/mpeg"/>
                                         </audio>
@@ -333,7 +332,7 @@ const PlayList = ( ) => {
 
 
                     </div>
-*/}
+
 
                 </div>
 
