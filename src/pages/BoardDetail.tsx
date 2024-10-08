@@ -1,4 +1,4 @@
-import {Link, useParams} from "react-router-dom";
+/*import {Link, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import { doc, getDoc, DocumentData , deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -8,11 +8,11 @@ import {detailCss, contentCss} from "./BoardDetail.style";
 import { useNavigate} from 'react-router-dom';
 import Logo from '../assets/logo2.svg';
 import { motion} from "framer-motion";
-import Footer from "../organisms/Footer/Footer.tsx";
+import Footer from "../organisms/Footer/Footer.tsx";*/
 
 const BoardDetail = () => {
 
-    const navigate = useNavigate();
+   /* const navigate = useNavigate();
     const { id } = useParams<{id : string}>();
     const [postData, setPostData] = useState<DocumentData | null>(null);
 
@@ -101,7 +101,7 @@ const BoardDetail = () => {
 
         </div>
         </>
-    )
+    )*/
 }
 
 export default BoardDetail;

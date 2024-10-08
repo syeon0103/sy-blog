@@ -1,3 +1,4 @@
+/*
 import { css } from '@emotion/react';
 import { motion} from "framer-motion";
 import {useEffect, useState} from "react";
@@ -11,12 +12,12 @@ interface textInfo {
 
 
 export const bubbleCss = css`
-    
+
     display: flex;
     justify-content: end;
     margin-right: 50px;
     margin-top : 20px;
-    
+
     .chatBubble {
         width: 400px;
         min-height: 50px;
@@ -28,12 +29,12 @@ export const bubbleCss = css`
         padding: 20px;
         word-break: break-all;
         box-sizing: border-box;
-        
+
         ::selection {
-            background-color: #FFD700; 
-            color: #000000; 
+            background-color: #FFD700;
+            color: #000000;
         }
-        
+
     }
 
     .chatBubble:after {
@@ -53,10 +54,13 @@ export const bubbleCss = css`
 
 `;
 
+*/
 
-const SpeechBubble = ({name, phone, email, content} : textInfo) => {
+const SpeechBubble = () => {
 
-    const [show, setShow] = useState(false);
+    //{name, phone, email, content} : textInfo
+
+  /*  const [show, setShow] = useState(false);
     useEffect(() => {
         setShow(true);
     }, []);
@@ -73,7 +77,7 @@ const SpeechBubble = ({name, phone, email, content} : textInfo) => {
             </div>
         </motion.div>
 
-    )
+    )*/
 
 }
 

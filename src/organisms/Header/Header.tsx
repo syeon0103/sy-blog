@@ -1,7 +1,7 @@
 import Logo from '../../assets/logo2.svg';
 import '../../styles/font.css'
 import { Link } from 'react-router-dom';
-import {color, motion} from "framer-motion";
+import { motion} from "framer-motion";
 
 const Header = () => {
     return (

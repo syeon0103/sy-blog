@@ -1,4 +1,4 @@
-import Header from "../organisms/Header/Header.tsx";
+/*import Header from "../organisms/Header/Header.tsx";
 import Editor from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
 import {useEffect, useRef, useState} from "react";
@@ -7,11 +7,11 @@ import { motion} from "framer-motion";
 import {db} from '../firebase'
 import { doc, getDocs, addDoc, setDoc , collection } from 'firebase/firestore';
 import {Link, useNavigate} from 'react-router-dom';
-import Logo from "../assets/logo2.svg";
+import Logo from "../assets/logo2.svg";*/
 
 const BoardWrite = () => {
 
-    const navigate = useNavigate(); // 훅 사용을 위해 여기서 초기화 사용자가 직접 클릭할 게 아니라면 그냥 네비게이트 사용
+   /* const navigate = useNavigate(); // 훅 사용을 위해 여기서 초기화 사용자가 직접 클릭할 게 아니라면 그냥 네비게이트 사용
 
     const [editorHtml , setEditorHtml] = useState<string>('');
     const editorRef = useRef<Editor>(null);
@@ -139,10 +139,10 @@ const BoardWrite = () => {
                     </div>
                 </div>
 
-                {/*<div className="mt-4">
+                {/!*<div className="mt-4">
                       <h2>에디터 내용</h2>
                       <div dangerouslySetInnerHTML={{ __html: editorHtml }} />
-                    </div>*/}
+                    </div>*!/}
 
 
             </div>
@@ -166,6 +166,6 @@ const BoardWrite = () => {
             </div>
 
         </>
-    )
+    )*/
 }
 export default BoardWrite;

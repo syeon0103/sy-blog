@@ -1,3 +1,4 @@
+/*
 import { css } from '@emotion/react';
 import { useState } from 'react';
 
@@ -38,9 +39,13 @@ interface RatingProps {
     rating: number;
     onRatingChange: (rating: number) => void;
 }
+*/
 
-const Rating = ({ rating, onRatingChange }: RatingProps) => {
-    const stars = [1, 2, 3, 4, 5];
+const Rating = () => {
+
+    //{ rating, onRatingChange }: RatingProps
+
+ /*   const stars = [1, 2, 3, 4, 5];
     const [hoverRating, setHoverRating] = useState<number | null>(null);
 
     const starClick = (value: number) => {
@@ -77,7 +82,7 @@ const Rating = ({ rating, onRatingChange }: RatingProps) => {
         <div css={ratingCss}>
             {stars.map(value => renderStar(value))}
         </div>
-    );
+    );*/
 };
 
 export default Rating;

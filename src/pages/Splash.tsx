@@ -1,10 +1,12 @@
+/*
 import whale from '../assets/icon/whale.svg'
 import spWhale from '../assets/icon/sparkingwhale.svg'
 import {wrapCss, splashCss, mentCss} from "./Splash.style";
 import {useEffect, useRef, useState} from "react";
+*/
 
 const Splash = () => {
-    const text = "welcome to suyeon's blog"
+   /* const text = "welcome to suyeon's blog"
     const [loadingText, setLoadingText] = useState('');
     let index = useRef(0);
 
@@ -24,7 +26,7 @@ const Splash = () => {
 
     }, []);
 
-  /*  useEffect(() => {
+  /!*  useEffect(() => {
         const typeWriter = () => {
             if(index.current < text.length) {
                 setDisplayedText(prevText => prevText + text.charAt(index.current));
@@ -37,7 +39,7 @@ const Splash = () => {
         typeWriter();
 
 
-    }, []);*/
+    }, []);*!/
 
 
     return (
@@ -55,7 +57,7 @@ const Splash = () => {
         </div>
     </div>
     )
-
+*/
 }
 
 export default Splash;

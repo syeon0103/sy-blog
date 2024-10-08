@@ -1,3 +1,4 @@
+/*
 import Header from "../organisms/Header/Header.tsx";
 import Footer from "../organisms/Footer/Footer.tsx";
 import { useLocation } from "react-router-dom";
@@ -69,8 +70,8 @@ const containerCss = css`
     max-width: 1200px;
 
     @media (max-width: 768px) {
-        flex-direction: column; /* 화면이 좁아지면 세로 방향으로 변경 */
-        align-items: center; /* 중앙 정렬 */
+        flex-direction: column; /!* 화면이 좁아지면 세로 방향으로 변경 *!/
+        align-items: center; /!* 중앙 정렬 *!/
     }
 `;
 
@@ -84,7 +85,7 @@ const textContainerCss = css`
     flex-direction: column;
     justify-content: center;
     color: whitesmoke;
-    margin-left: 1rem; /* 여백 조정 */
+    margin-left: 1rem; /!* 여백 조정 *!/
     flex: 1;
 `;
 
@@ -128,7 +129,7 @@ const movieTextContainerCss = css`
     justify-content: center;
     align-items: center;
     padding: 2rem;
-   
+
 `;
 
 const movieTextBoxCss = css`
@@ -148,9 +149,10 @@ const movieTextContentCss = css`
     font-size: 1rem;
     color: gray;
 `;
+*/
 
 const ReviewDetail = () => {
-    const [rating, setRating] = useState<number>(0);
+  /*  const [rating, setRating] = useState<number>(0);
     const data = useLocation();
     const { review } = data.state || {};
 
@@ -229,7 +231,7 @@ const ReviewDetail = () => {
             </motion.div>
             <Footer />
         </>
-    );
+    );*/
 };
 
 export default ReviewDetail;

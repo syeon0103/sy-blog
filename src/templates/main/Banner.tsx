@@ -1,6 +1,4 @@
-import React from 'react';
 import { bannerCss } from './banner.style.tsx';
-import { motion } from 'framer-motion';
 
 const Banner = () => {
     const text = '뉴스   2024.07.21   사이트 리뉴얼 중입니다.';
@@ -18,6 +16,8 @@ const Banner = () => {
         }
         return items;
     };
+
+
 
     return (
         <div css={bannerCss}>

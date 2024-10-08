@@ -6,7 +6,6 @@ import Review from './pages/Review.tsx'
 import Contact from './pages/ContactPage.tsx'
 import BoardWrite from "./pages/BoardWrite.tsx";
 import BoardDetail from "./pages/BoardDetail";
-import Splash from "./pages/Splash"
 import ReviewDetail from "./pages/ReviewDetail.tsx"
 import PlayList from "./templates/main/PlayList.tsx";
 
@@ -59,11 +58,7 @@ const router = createBrowserRouter([
 
 function App() {
 
-
-
-
-
-    const [loading, setLoading] = useState(true);
+   /* const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -72,7 +67,7 @@ function App() {
 
         return () => clearTimeout(timer);
     }, []);
-
+*/
     return (
         <>
             <RouterProvider router={router} />

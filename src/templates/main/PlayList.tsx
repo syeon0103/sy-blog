@@ -5,6 +5,9 @@ import Vibrant from 'node-vibrant';
 import Book from "../../organisms/playList/Book.tsx";
 import musicIcon from '../../assets/icon/music.svg';
 import {useLocation} from "react-router-dom";
+import Movie from "../../organisms/playList/Movie.tsx";
+import mainIcon from "../../assets/icon1.svg";
+import mainIcon2 from "../../assets/icon2.svg";
 
 interface keyword {
     key1? : string,
@@ -16,7 +19,13 @@ const PlayList = ( ) => {
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
+
+    const token = location.state.token;
+
+    console.log("toklocation.state.tokenen:::::::::2313211312" , token)
+
     const bookList = [];
+    const musicList = [];
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
@@ -28,14 +37,14 @@ const PlayList = ( ) => {
     const recommendList_1 = [
         {
             id: 1,
-            keyword : ['여름'],
+            keyword : '여름',
             book : ['바깥은 여름', '여름의 빌라'] ,
             movie : ['백만엔걸 스즈코' , '괴물', '시간을 달리는 소녀'],
             music : ['메모리즈', 'Be my next', '네가 내 마음에 자리 잡았다']
         },
         {
             id: 2,
-            keyword: ['겨울'],
+            keyword: '겨울',
             book : ['나주에 대하여', '쇼코의 미소'] ,
             movie : ['눈이 부시게' , '쉰들러 리스트', '도깨비'],
             music : ['소행성', 'wish you hell']
@@ -44,14 +53,14 @@ const PlayList = ( ) => {
 
     const recommendList_2 = [
         {
-            keyword : ['추천'],
+            keyword : '추천',
             book : ['종의 기원', '슬픔을 공부하는 슬픔'] ,
             movie : ['인사이드 아웃2' , '엘리멘탈', '도깨비'],
             music : ['재연', '붐붐베이스', 'love dive']
         },
 
         {
-            keyword: ['애매모호'],
+            keyword: '애매모호',
             book : ['아주 희미한 빛으로도', '눈부신 안부'] ,
             movie : ['택시운전사' ],
             music : ['조깅', '녹아내려요', 'saltwater']
@@ -62,53 +71,70 @@ const PlayList = ( ) => {
 
         const matchingKeyword = () => {
 
-
             const keyword = recommendList_1.map(item => item.keyword);
-            console.log("keyword:::::::", keyword)
-            const keyword2 = recommendList_2.map(item => item.keywords);
+            const keyword2 = recommendList_2.map(item => item.keyword);
 
             for (const key of keyword) {
+                const filteredBooks = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
+                const filteredMusic = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
                 if (key == keywords.key1) {
-                    bookList.push({
-                        book: recommendList_1.map(item => item.book)
-                    });
+                    bookList.push(...filteredBooks);
+                    musicList.push(...filteredMusic);
 
                 }
             }
 
             for (const key of keyword2) {
                 if (key === keywords.key2) {
-                    bookList.push({
-                        book:  recommendList_2.map(item => item.book)
-                    });
+                    const filteredBooks = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
+                    const filteredMusic = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
+                    bookList.push(...filteredBooks);
+                    musicList.push(...filteredMusic);
                 }
             }
 
 
-            /*
-             1. 키워드1 과 키워드2와 매칭되는 걸 찾는다.
-             2. musiclist와 booklist를 각각 만든다.
-             3. 매칭되는 키워드의 music과 book을 각 list에 push 해서 넣어준다
-             4. 해당 list를 검색 조건이 되게 music과 book api search에 보낸다
-             5. 검색창이 없어도 해당 키워드를 받아와 자동 검색된 데이터가 나오도록 한다.
-             */
-
-
-
-            console.log(keywords);
         }
+
 
         matchingKeyword();
 
 
     }, [keywords]);
 
+    const flatMusicList = musicList;
 
-
-    const [token, setToken] = useState<string | null>(null);
-    const [playlists, setPlaylists] = useState<any[]>([]);
+    let randomMusic =''
 
     useEffect(() => {
+
+       randomMusic = getRandomMusic(musicList.flat());
+
+        console.log("randomMusic:::", randomMusic)
+
+        function getRandomMusic(musicList) {
+            if (flatMusicList.length === 0) return null;
+            const randomIndex = Math.floor(Math.random() * musicList.length);
+            return musicList[randomIndex];
+        }
+
+
+        if(randomMusic) {
+            searchTrack(randomMusic, token);
+        }
+
+
+
+    }, []);
+
+
+
+
+
+
+    const [playlists, setPlaylists] = useState<any[]>([]);
+
+  /*  useEffect(() => {
         const hash = window.location.hash;
         console.log("hash:::" , hash)
 
@@ -133,7 +159,7 @@ const PlayList = ( ) => {
         if (token) {
 
         }
-    }, [token]);
+    }, [token]);*/
 
     const [trackName, setTrackName] = useState('');
     const [tracks, setTracks] = useState<any[]>([]);
@@ -144,13 +170,16 @@ const PlayList = ( ) => {
     };
 
     const searchTrack = async (trackName: string, token: string) => {
+
+        console.log('token:::' , token)
+
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 params: {
-                    q: trackName,
+                    q: randomMusic,
                     type: 'track',
                     limit: 1
                 }
@@ -252,42 +281,46 @@ const PlayList = ( ) => {
     };*/
 
     return (
-        <div className="bg-[#e9e8ed] w-full min-h-screen flex flex-col items-center gap-5 p-3">
+        <div className="bg-[#e9e8ed] min-h-screen flex flex-col items-center gap-5 p-3">
 
-            <div>
-                <input type="text" value={trackName} onChange={handleInputChange} placeholder="Search for a track..."/>
-                <button onClick={() => handleSearch(trackName)}>Search</button>
+            <div className="flex flex-row items-center justify-center">
+                {/*    <div className="text-gray-700 font-normal font-pretendard sm:text-2xl md:text-2xl text-4xl ">
+                    <p> 뚜플리</p>
+                </div>*/}
+                <img src={mainIcon} className="w-10 h-14 animate-bounce"/>
+                <span className="font-pretendard mx-8 text-3xl text-charry font-semibold">뚜플리</span>
+                <img src={mainIcon2} className="w-16 h-12 mt-16 animate-bounce"/>
+                {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
             </div>
 
-            {!token ? (
-                <button onClick={Auth}>Login with Spotify</button>
-            ) : (
+            <div className="flex flex-row  sm:flex-col  md:flex-col">
 
-                <>
-                    <div className="font-pretendard text-3xl font-semibold flex ">
-                     <img src={musicIcon} alt="musicIcon"  className="mr-2"/>
+                <div className="px-4">
+
+                    <div className="font-pretendard text-3xl font-semibold flex flex-row   justify-center mt-10 mb-8 ">
+                        <img src={musicIcon as string} alt="musicIcon" className="mr-2"/>
                         <span>Music</span>
                     </div>
 
-                    <div className="w-full ">
+                    <div className=" w-full justify-center flex">
                         <ul>
                             {tracks.map((track) => (
 
-                                <div className="w-full rounded-2xl flex justify-center mb-8 " style={{
-                                    height: '600px',
+                                <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
+                                    height: '400px',
                                     backgroundColor: `${mainColors[track.id]}80` || 'transparent'
                                 }}>
                                     <li key={track.id}>
 
                                         <img src={track.album.images[0]?.url} alt={track.name}
-                                             className="w-80 h-80 shadow-2xl rounded-2xl mt-10"
+                                             className="w-40 h-40 shadow-2xl rounded-2xl mt-10 ml-20"
                                              onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
                                         <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
                                         <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>
                                         <audio controls className="w-80 mt-3">
                                             <source src={track.preview_url} type="audio/mpeg"/>
                                         </audio>
-                                        <div className="font-pretendard text-center mt-10">
+                                        <div className="font-pretendard text-center mt-6">
                                             <a href={`https://open.spotify.com/track/${track.id}`}
                                                target="_blank"
                                                rel="noopener noreferrer"> 스포티파이에서 들어보세요!
@@ -299,13 +332,31 @@ const PlayList = ( ) => {
                             ))}
 
                         </ul>
+
+
                     </div>
 
-                </>
-            )}
-            <div className="mt-10 w-full">
-                 <Book/>
+
+                </div>
+
+
+                <div className="mt-10 w-full justify-center flex px-4">
+                    <Book list={bookList}/>
+                </div>
+
             </div>
+
+
+            <div className="mt-10 w-full justify-center flex">
+                <Movie
+                />
+            </div>
+
+
+            <div className="text-white font-pretendard mt-30 text-sm bottom-0  sm:text-[7px]">
+                Copyright © 2024 뚜플리
+            </div>
+
 
         </div>
     )

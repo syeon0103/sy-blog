@@ -1,7 +1,11 @@
 
+interface KeywordProps  {
+    title: string;
+    icon: React.ReactNode;
+    isSelected: boolean;
+};
 
-
-const Keyword = ({title, icon, isSelected }) => {
+const Keyword = ({title, icon, isSelected } : KeywordProps) => {
 
     return (
         <>

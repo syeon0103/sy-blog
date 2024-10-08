@@ -1,5 +1,4 @@
 
-import Lottie from 'lottie-react';
 import spring from '../../assets/icon/cherryBlossom.svg'
 import summer from '../../assets/icon/beach.svg'
 import fall from '../../assets/icon/leaf.svg'
@@ -11,12 +10,10 @@ import thinking from '../../assets/icon/thinkinh.svg'
 import mainIcon from '../../assets/icon1.svg'
 import mainIcon2 from '../../assets/icon2.svg'
 
-import book from '../../assets/animation/book.json'
-import { motion } from "framer-motion";
-import {bubbleCss, mainCss} from "./Home.style.tsx";
+import { mainCss} from "./Home.style.tsx";
 import Keyword from "../../atoms/Keyword.tsx";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Auth from "../../api/Auth.tsx";
 
 const Home = () => {
@@ -58,6 +55,75 @@ const Home = () => {
 
     const [selectedKeyword1 , setSelectedKeyword1] = useState('');
     const [selectedKeyword2 , setSelectedKeyword2] = useState('');
+
+    const [token, setToken] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        const hash = window.location.hash;
+
+        let _token = null;
+
+        if (hash) {
+            const params = new URLSearchParams(hash.replace('#', ''));
+            _token = params.get('access_token');
+            window.location.hash = '';
+        }
+        if(!localStorage.getItem('spoti-token')) {
+            console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
+
+            Auth();
+            setToken(localStorage.getItem('spoti-token'));
+        } else {
+            console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
+           // Auth();
+            setToken(localStorage.getItem('spoti-token'));
+        }
+
+        if(_token) {
+            console.log("_token12112313312132",_token )
+            setToken(_token);
+            localStorage.setItem('spoti-token', _token);
+        }
+
+
+    }, []);
+
+
+    useEffect(() => {
+/*
+        const TOKEN_EXPIRY = 60 * 60 * 1000;
+
+        const checkToken = () => {
+            const token = localStorage.getItem('spoti-token');
+            const expiryTime = localStorage.getItem('spoti-token-expiry');
+
+            // 현재 시간
+            const currentTime = new Date().getTime();
+
+            // 토큰이 없거나 만료된 경우
+            if (!token || !expiryTime || currentTime > expiryTime) {
+                console.log("Token is missing or expired.");
+                Auth();
+            } else {
+                console.log("Valid token found:", token);
+            }
+        };*/
+
+
+
+        if(!localStorage.getItem('spoti-token')) {
+            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+
+            Auth();
+            setToken(localStorage.getItem('spoti-token'));
+        } else {
+            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+        }
+
+            //Auth();
+
+    }, []);
 
 
     return (
@@ -101,7 +167,8 @@ const Home = () => {
                             <div className="flex flex-wrap">
                                 {keyword1.map((key, index) => (
                                     <div className="mb-3" onClick={() => setSelectedKeyword1(key.title)}>
-                                        <Keyword key={index} title={key.title} icon={key.icon as string}  isSelected={selectedKeyword1 === key.title}/>
+                                        <Keyword key={index} title={key.title} icon={key.icon as string}
+                                                 isSelected={selectedKeyword1 === key.title}/>
                                     </div>
                                 ))}
                             </div>
@@ -129,8 +196,9 @@ const Home = () => {
                                 className={`w-0.5 bg-charry mx-3 ${keyword2.length ? 'h-[calc(12rem+1rem*' + keyword2.length + ')]' : 'h-12'}`}></div>
                             <div className="flex flex-wrap">
                                 {keyword2.map((key, index) => (
-                                    <div className='mb-3'  onClick={() => setSelectedKeyword2(key.title)}>
-                                        <Keyword key={index} title={key.title} icon={key.icon as string}   isSelected={selectedKeyword2 === key.title} />
+                                    <div className='mb-3' onClick={() => setSelectedKeyword2(key.title)}>
+                                        <Keyword key={index} title={key.title} icon={key.icon as string}
+                                                 isSelected={selectedKeyword2 === key.title}/>
                                     </div>
                                 ))}
                             </div>
@@ -139,7 +207,8 @@ const Home = () => {
                 </div>
 
                 <div className="mt-10">
-                    <Link to={`/playList?keyword1=${selectedKeyword1}&keyword2=${selectedKeyword2}`}>
+                    <Link to={`/playList?keyword1=${selectedKeyword1}&keyword2=${selectedKeyword2}`}
+                          state={{token: token}}>
                         <button type="submit"
                                 className=" rounded-full py-2 px-10 bg-gradient-to-b from-white to-charry border border-charry shadow-inner shadow-charryHover drop-shadow false">
                             <span className="text-white font-pretendard text-base font-normal">스까묵기</span>
