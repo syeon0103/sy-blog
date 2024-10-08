@@ -94,16 +94,16 @@ const PlayList = ( ) => {
 
     }, [keywords]);
 
-    const flatMusicList = musicList;
+    const flatMusicList: string[]= musicList.flat();
 
-    let randomMusic =''
+    let randomMusic: string | null =''
 
     useEffect(() => {
 
-       randomMusic = getRandomMusic(musicList.flat());
+       randomMusic = getRandomMusic(flatMusicList);
 
 
-        function getRandomMusic(musicList) {
+        function getRandomMusic(musicList: string[]): string | null {
             if (flatMusicList.length === 0) return null;
             const randomIndex = Math.floor(Math.random() * musicList.length);
             return musicList[randomIndex];
@@ -116,7 +116,7 @@ const PlayList = ( ) => {
 
 
 
-    }, []);
+    }, [flatMusicList]);
 
 
 
