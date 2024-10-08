@@ -1,5 +1,14 @@
 
 const BoardList = () => {
+
+
+
+
+    return(
+        <>
+        </>
+    )
+
 /*
     const imgList = [img1, img2, img3, img4, img5];
     const [posts , setPosts] = useState<any[]>([])

@@ -7,14 +7,22 @@ import {useEffect, useState} from "react";
 import ChatInput from "../atoms/ChatInput.tsx";*/
 
 
+/*
 interface getChatData {
     name : string;
     phone : string;
     email : string;
     content : string;
 }
+*/
 
 const ChatMsg = () => {
+
+
+    return (
+        <></>
+    )
+
     /*//스프레드 연산자를 사용해서 현재까지의 버블 내용을 복사함...그래야 내용이 이어지지.
     //그 다음에 새로운 content 내용을 넣어주기 위해 객체를 추가한다. 일단 name이랑 그외는 그대로.
 

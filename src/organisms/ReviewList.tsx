@@ -10,6 +10,14 @@ import { motion } from "framer-motion";
 import {Link} from "react-router-dom";*/
 
 const ReviewList = () => {
+
+
+    return(
+        <>
+        </>
+    )
+
+
    /* const [rating, setRating] = useState<number>(0);
     const [show, setShow] = useState(false);
 

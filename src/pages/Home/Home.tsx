@@ -1,4 +1,4 @@
-
+/** @jsxImportSource @emotion/react */
 import spring from '../../assets/icon/cherryBlossom.svg'
 import summer from '../../assets/icon/beach.svg'
 import fall from '../../assets/icon/leaf.svg'
@@ -13,7 +13,7 @@ import mainIcon2 from '../../assets/icon2.svg'
 import { mainCss} from "./Home.style.tsx";
 import Keyword from "../../atoms/Keyword.tsx";
 import {Link} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Auth from "../../api/Auth.tsx";
 
 const Home = () => {

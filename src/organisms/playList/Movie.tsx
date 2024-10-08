@@ -1,5 +1,5 @@
 import movieIcon from "../../assets/icon/movie.svg";
-import React, {useEffect, useState} from "react";
+import  {useEffect, useState} from "react";
 import axios from "axios";
 import Vibrant from "node-vibrant";
 
@@ -7,7 +7,7 @@ import Vibrant from "node-vibrant";
 const Movie = () => {
 
     const apiKey = '0171a2e41d0e9e3154abe8f71e08c565'
-    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIw'
+   // const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIw'
     const BASE_URL = 'https://api.themoviedb.org/3';
 
 
@@ -23,11 +23,11 @@ const Movie = () => {
     };
 
 
-    const [movieData, setMovieData] =  useState<any[]>([]);
+    const [movieData, setMovieData] =  useState<string[]>([]);
 
-    const [progList, setProgList] =useState<any[]>([]);
+   // const [progList, setProgList] =useState<any[]>([]);
 
-    const [loading, setLoading] = useState(false);
+    //const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const Movie = () => {
     const [tvData, setTvData] =  useState<any[]>([]);
     const handleSearch = async () => {
 
-        setLoading(true);
+       // setLoading(true);
         try {
             const movieName = await searchMovies("시간을 달리는 소녀");
             const tvName =  await searchTVShows("눈이 부시게");
@@ -57,7 +57,7 @@ const Movie = () => {
         } catch (error) {
             console.error("Error searching books:", error);
         } finally {
-            setLoading(false);
+          //  setLoading(false);
         }
     };
 
@@ -83,7 +83,7 @@ const Movie = () => {
         //  const proxyUrl = 'https://api.allorigins.win/get?url=';
         const proxyUrl = 'https://corsproxy.io/?';
 
-        const imageUrlTest = 'https://shopping-phinf.pstatic.net/main_4320796/43207962625.20231014070956.jpg';
+       // const imageUrlTest = 'https://shopping-phinf.pstatic.net/main_4320796/43207962625.20231014070956.jpg';
         const imgTest = proxyUrl + encodeURIComponent(imageUrl);
         //  console.log("imgTest:::" , imgTest)
 
@@ -109,7 +109,7 @@ const Movie = () => {
 
     const [mainColors, setMainColors] = useState<{ [key: string]: string }>({})
 
-    const getImgPath = (path) => {
+    const getImgPath = (path : string) => {
         return `https://image.tmdb.org/t/p/w500/${path}`;
     };
 
@@ -130,19 +130,19 @@ const Movie = () => {
 
                         <div className="w-[400px] rounded-2xl flex justify-center mb-8 " key={movieData[0]} style={{
                             height: '400px',
-                            backgroundColor: `${mainColors[movieData.id]}80` || 'transparent'
+                            backgroundColor: `${mainColors[movieData.id as string ]}80` || 'transparent'
                         }}>
 
-                            <li key={movieData.id}
+                            <li key={movieData.id  as string}
                                 className="text-center mb-4 flex flex-col items-center">
 
                                 <div className="w-40 h-40 ">
-                                    <img src={getImgPath(movieData.poster_path)} alt="tv"
+                                    <img src={getImgPath(movieData.poster_path  as string)} alt="tv"
                                          className=" shadow-2xl rounded-2xl mt-10 object-cover"
-                                         onLoad={() => getMainColor(getImgPath(movieData.poster_path), movieData.id)}/>
+                                         onLoad={() => getMainColor(getImgPath(movieData.poster_path  as string), movieData.id  as string)}/>
                                 </div>
 
-                                <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{movieData.title}</p>
+                                <p className="font-pretendard text-2xl text-center mt-36 font-semibold">{movieData.title  as string}</p>
 
 
                             </li>

@@ -1,7 +1,6 @@
-import {query} from "firebase/firestore";
+
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import bookImg2 from '../../assets/book/book_2.jpg'
+import  {useEffect, useState} from "react";
 import Vibrant from "node-vibrant";
 import bookIcon from '../../assets/icon/book.svg';
 
@@ -14,7 +13,7 @@ const Book = ({list} : bookList) => {
 
     const flatBookList = list.flat();
 
-    function getRandomBook(bookList) {
+    function getRandomBook(bookList : string[]) {
         if (flatBookList.length === 0) return null;
         const randomIndex = Math.floor(Math.random() * bookList.length);
         return bookList[randomIndex];
@@ -42,7 +41,7 @@ const Book = ({list} : bookList) => {
        //  const proxyUrl = 'https://api.allorigins.win/get?url=';
         const proxyUrl = 'https://corsproxy.io/?';
 
-        const imageUrlTest = 'https://shopping-phinf.pstatic.net/main_4320796/43207962625.20231014070956.jpg';
+      //  const imageUrlTest = 'https://shopping-phinf.pstatic.net/main_4320796/43207962625.20231014070956.jpg';
         const imgTest = proxyUrl + encodeURIComponent(imageUrl);
       //  console.log("imgTest:::" , imgTest)
 
@@ -107,27 +106,29 @@ const Book = ({list} : bookList) => {
 
     }
 
-    const [query, setQuery] = useState('');
+    //const [query, setQuery] = useState<string>('');
     const [loading, setLoading] = useState(false);
 
     const handleSearch = async () => {
-
         setLoading(true);
         try {
             const data = await getBooks(randomBook);
-            //console.log("data.documents:::" , data.items)
+            console.log("data.documents:::", data);
 
-            if(data) {
-                setIsBookState(true)
+            if (data && Array.isArray(data.items)) {
+                setBookData(data.items);
+                setIsBookState(true);
+            } else {
+                console.error("Unexpected data structure:", data);
             }
 
-            setBookData(data.items);
         } catch (error) {
             console.error("Error searching books:", error);
         } finally {
-            setLoading(false);
+            setLoading(false); // 이 줄은 주석을 해제하여 로딩 상태를 종료하세요.
         }
     };
+
 
     return (
 
