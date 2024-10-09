@@ -18,6 +18,7 @@ import Auth from "../../api/Auth.tsx";
 
 const Home = () => {
 
+
     const keyword1 = [
         {
             title : '봄',
@@ -70,18 +71,18 @@ const Home = () => {
             window.location.hash = '';
         }
         if(!localStorage.getItem('spoti-token')) {
-            console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
+           // console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
 
             Auth();
             setToken(localStorage.getItem('spoti-token'));
         } else {
-            console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
+            //console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
            // Auth();
             setToken(localStorage.getItem('spoti-token'));
         }
 
         if(_token) {
-            console.log("_token12112313312132",_token )
+            //console.log("_token12112313312132",_token )
             setToken(_token);
             localStorage.setItem('spoti-token', _token);
         }
@@ -113,12 +114,12 @@ const Home = () => {
 
 
         if(!localStorage.getItem('spoti-token')) {
-            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+           // console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
 
             Auth();
             setToken(localStorage.getItem('spoti-token'));
         } else {
-            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+          //  console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
 
         }
 

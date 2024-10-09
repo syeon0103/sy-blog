@@ -17,7 +17,8 @@ const PlayList = ( ) => {
 
 
     const bookList: string[][] = [[]];
-    const musicList : string[][] = [[]];
+    const [musicList, setMusicList] = useState<string[][]>([[]]);
+
     const key1 = searchParams.get('keyword1') || '';
     const key2 = searchParams.get('keyword2') || '';
 
@@ -30,7 +31,7 @@ const PlayList = ( ) => {
         {
             id: 1,
             keyword : '여름',
-            book : ['바깥은 여름', '여름의 빌라' , '사바삼사라 서'] ,
+            book : ['바깥은 여름', '여름의 빌라', '사바삼사라 서'] ,
             movie : ['백만엔걸 스즈코' , '괴물', '시간을 달리는 소녀'],
             music : ['메모리즈', 'Be my next', '네가 내 마음에 자리 잡았다']
         },
@@ -63,29 +64,36 @@ const PlayList = ( ) => {
 
         const matchingKeyword = () => {
 
+            const newMusicList: string[][] = [];
+
             const keyword = recommendList_1.map(item => item.keyword);
             const keyword2 = recommendList_2.map(item => item.keyword);
 
             for (const key of keyword) {
-                const filteredBooks = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
-                const filteredMusic = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
+                const filteredBooks: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.book);
+                const filteredMusic: string[][] = recommendList_1.filter(item => item.keyword === key).map(item => item.music);
                 if (key == keywords.key1) {
                     bookList.push(...filteredBooks);
-                    musicList.push(...filteredMusic);
-
+                   // musicList.push(...filteredMusic);
+                    newMusicList.push(...filteredMusic);
                 }
             }
 
             for (const key of keyword2) {
                 if (key === keywords.key2) {
-                    const filteredBooks = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
-                    const filteredMusic = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
+                    const filteredBooks: string[][] = recommendList_2.filter(item => item.keyword === key).map(item => item.book);
+                    const filteredMusic: string[][]  = recommendList_2.filter(item => item.keyword === key).map(item => item.music);
                     bookList.push(...filteredBooks);
-                    musicList.push(...filteredMusic);
+                    //musicList.push(...filteredMusic);
+                    newMusicList.push(...filteredMusic);
                 }
             }
 
+           // setMusicList(newMusicList);
 
+            if (JSON.stringify(newMusicList) !== JSON.stringify(musicList)) {
+                setMusicList(newMusicList);
+            }
         }
 
 
@@ -94,60 +102,64 @@ const PlayList = ( ) => {
 
     }, [keywords]);
 
-    const flatMusicList : string[][] = musicList;
+
+    const flatMusicList: string[]= musicList.flat();
 
     let randomMusic: string | null =''
 
     useEffect(() => {
 
-        randomMusic = getRandomMusic(musicList.flat());
+        let randomMusic: string | null = getRandomMusic(flatMusicList);
 
+        if (randomMusic) {
+            searchTrack(token);
+        }
 
         function getRandomMusic(musicList: string[]): string | null {
-            if (flatMusicList.length === 0) return null;
+            if (musicList.length === 0) return null;
+
             const randomIndex = Math.floor(Math.random() * musicList.length);
             return musicList[randomIndex];
         }
 
 
-        if(randomMusic) {
-            searchTrack(token);
+    }, [flatMusicList]);
+
+
+
+
+
+
+   // const [playlists, setPlaylists] = useState<any[]>([]);
+
+  /*  useEffect(() => {
+        const hash = window.location.hash;
+        console.log("hash:::" , hash)
+
+
+        let _token = null;
+
+        if (hash) {
+            const params = new URLSearchParams(hash.replace('#', ''));
+            _token = params.get('access_token');
+            window.location.hash = '';
         }
 
+        if(_token) {
+            setToken(_token);
+        }
 
+        console.log("_token:", _token);
 
     }, []);
 
-    //const [playlists, setPlaylists] = useState<any[]>([]);
+    useEffect(() => {
+        if (token) {
 
-    /*  useEffect(() => {
-          const hash = window.location.hash;
-          console.log("hash:::" , hash)
+        }
+    }, [token]);*/
 
-
-          let _token = null;
-
-          if (hash) {
-              const params = new URLSearchParams(hash.replace('#', ''));
-              _token = params.get('access_token');
-              window.location.hash = '';
-          }
-
-          if(_token) {
-              setToken(_token);
-          }
-
-          console.log("_token:", _token);
-
-      }, []);
-
-      useEffect(() => {
-          if (token) {
-
-          }
-      }, [token]);*/
-
-  //  const [trackName, setTrackName] = useState('');
+   // const [trackName, setTrackName] = useState<string>('');
     const [tracks, setTracks] = useState<any[]>([]);
     const [mainColors, setMainColors] = useState<{ [key: string]: string }>({})
 
@@ -157,7 +169,6 @@ const PlayList = ( ) => {
 
     const searchTrack = async (token: string) => {
 
-        console.log('token:::' , token)
 
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search`, {
@@ -178,25 +189,25 @@ const PlayList = ( ) => {
         }
     };
 
-  /*  const handleSearch = async (trackName: string) => {
+ /*   const handleSearch = async (trackName: string) => {
         const tracks = await searchTrack(trackName, token);
         // 결과를 UI에 업데이트
     };*/
 
-    /* const getMainColor = (imageUrl: string) => {
-         const img = new Image();
-         img.crossOrigin = 'Anonymous'; // CORS 설정
-         img.src = imageUrl;
+   /* const getMainColor = (imageUrl: string) => {
+        const img = new Image();
+        img.crossOrigin = 'Anonymous'; // CORS 설정
+        img.src = imageUrl;
 
-         img.onload = () => {
-             console.log("1111111111")
-             const colorThief = new ColorThief();
-             const rgbColor = colorThief.getColor(img);
-             const colorHex = `rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]})`; // RGB를 HEX로 변환
-             console.log('Main color:', colorHex);
-             setMainColor(colorHex); // 메인 색상 상태 업데이트
-         };
-     };*/
+        img.onload = () => {
+            console.log("1111111111")
+            const colorThief = new ColorThief();
+            const rgbColor = colorThief.getColor(img);
+            const colorHex = `rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]})`; // RGB를 HEX로 변환
+            console.log('Main color:', colorHex);
+            setMainColor(colorHex); // 메인 색상 상태 업데이트
+        };
+    };*/
 
 
 
@@ -207,30 +218,30 @@ const PlayList = ( ) => {
 
         img.onload = () => {
 
-            /*  Vibrant.from(imageUrl).getPalette().then((palette) => {
-                  const colors = [
-                      palette.Vibrant?.hex,
-                      palette.Muted?.hex,
-                      palette.DarkVibrant?.hex,
-                      palette.LightVibrant?.hex,
-                      palette.DarkMuted?.hex,
-                      palette.LightMuted?.hex
-                  ].filter(Boolean); // 유효한 색상만 필터링
+          /*  Vibrant.from(imageUrl).getPalette().then((palette) => {
+                const colors = [
+                    palette.Vibrant?.hex,
+                    palette.Muted?.hex,
+                    palette.DarkVibrant?.hex,
+                    palette.LightVibrant?.hex,
+                    palette.DarkMuted?.hex,
+                    palette.LightMuted?.hex
+                ].filter(Boolean); // 유효한 색상만 필터링
 
-                  // 그라데이션 생성
-                  const gradient = `linear-gradient(135deg, ${colors.join(', ')})`;
-                  console.log('Gradient:', gradient);
+                // 그라데이션 생성
+                const gradient = `linear-gradient(135deg, ${colors.join(', ')})`;
+                console.log('Gradient:', gradient);
 
-                  // 상태 업데이트
-                  setMainColors((prevGradients) => ({
-                      ...prevGradients,
-                      [trackId]: gradient || 'transparent',
-                  }));
-              }).catch(err => {
-                  console.error('Error extracting colors:', err);
-              });*/
+                // 상태 업데이트
+                setMainColors((prevGradients) => ({
+                    ...prevGradients,
+                    [trackId]: gradient || 'transparent',
+                }));
+            }).catch(err => {
+                console.error('Error extracting colors:', err);
+            });*/
 
-            Vibrant.from(imageUrl).getPalette().then((palette) => {
+          Vibrant.from(imageUrl).getPalette().then((palette) => {
                 const vibrantColor = palette.Vibrant?.hex;
                 console.log('Vibrant color:', vibrantColor);
 
@@ -267,15 +278,15 @@ const PlayList = ( ) => {
     };*/
 
     return (
-        <div className="bg-[#e9e8ed] w-full min-h-screen flex flex-col items-center gap-5 p-3">
+        <div className="bg-[#e9e8ed] min-h-screen flex flex-col items-center gap-5 p-3">
 
             <div className="flex flex-row items-center justify-center">
                 {/*    <div className="text-gray-700 font-normal font-pretendard sm:text-2xl md:text-2xl text-4xl ">
                     <p> 뚜플리</p>
                 </div>*/}
-                <img src={mainIcon as string} className="w-10 h-14 animate-bounce" alt="아이콘1"/>
+                <img src={mainIcon as string} className="w-10 h-14 animate-bounce"/>
                 <span className="font-pretendard mx-8 text-3xl text-charry font-semibold">뚜플리</span>
-                <img src={mainIcon2 as string} className="w-16 h-12 mt-16 animate-bounce"  alt="아이콘2"/>
+                <img src={mainIcon2 as string} className="w-16 h-12 mt-16 animate-bounce"/>
                 {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
             </div>
 
@@ -290,8 +301,8 @@ const PlayList = ( ) => {
 
                     <div className=" w-full justify-center flex">
 
-                        {tracks.map((track) => (
-                            <ul key={track.id}>
+                            {tracks.map((track) => (
+                                <ul key={track.id}>
                                 <div className="w-[400px] rounded-2xl flex justify-center items-center mb-8 " style={{
                                     height: '400px',
                                     backgroundColor: `${mainColors[track.id]}80` || 'transparent'
@@ -302,7 +313,7 @@ const PlayList = ( ) => {
                                              className="w-40 h-40 shadow-2xl rounded-2xl mt-10 ml-20"
                                              onLoad={() => getMainColor(track.album.images[0]?.url, track.id)}/>
                                         <p className="font-pretendard text-2xl text-center mt-5 font-semibold">{track.name}</p>
-                                        {/* <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>*/}
+                                       {/* <p className="font-pretendard text-base text-center mt-1"> {track.artists.map(artist => artist.name).join(', ')}</p>*/}
                                         <audio controls className="w-80 mt-3">
                                             <source src={track.preview_url} type="audio/mpeg"/>
                                         </audio>
@@ -315,8 +326,8 @@ const PlayList = ( ) => {
 
                                     </li>
                                 </div>
-                            </ul>
-                        ))}
+                                </ul>
+                            ))}
 
 
 
