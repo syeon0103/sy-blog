@@ -137,7 +137,7 @@ const Home = () => {
                     <p> 뚜플리</p>
                 </div>*/}
                     <img src={mainIcon} className="w-10 h-14 animate-bounce"/>
-                    <span className="font-pretendard mx-8 text-xl text-charry font-semibold">뚜플리</span>
+                    <span className="font-pretendard mx-8 text-lg text-charry font-semibold">뚜플리</span>
                     <img src={mainIcon2} className="w-16 h-12 mt-16 animate-bounce"/>
                     {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
                 </div>

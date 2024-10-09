@@ -274,7 +274,7 @@ const PlayList = ( ) => {
                     <p> 뚜플리</p>
                 </div>*/}
                 <img src={mainIcon as string} className="w-10 h-14 animate-bounce" alt="아이콘1"/>
-                <span className="font-pretendard mx-8 text-3xl text-charry font-semibold">뚜플리</span>
+                <span className="font-pretendard mx-8 text-2xl text-charry font-semibold">뚜플리</span>
                 <img src={mainIcon2 as string} className="w-16 h-12 mt-16 animate-bounce"  alt="아이콘2"/>
                 {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
             </div>
