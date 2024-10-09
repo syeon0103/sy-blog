@@ -18,6 +18,7 @@ import Auth from "../../api/Auth.tsx";
 
 const Home = () => {
 
+
     const keyword1 = [
         {
             title : '봄',
@@ -70,18 +71,18 @@ const Home = () => {
             window.location.hash = '';
         }
         if(!localStorage.getItem('spoti-token')) {
-            console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
+           // console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
 
             Auth();
             setToken(localStorage.getItem('spoti-token'));
         } else {
-            console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
+            //console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
            // Auth();
             setToken(localStorage.getItem('spoti-token'));
         }
 
         if(_token) {
-            console.log("_token12112313312132",_token )
+            //console.log("_token12112313312132",_token )
             setToken(_token);
             localStorage.setItem('spoti-token', _token);
         }
@@ -113,12 +114,12 @@ const Home = () => {
 
 
         if(!localStorage.getItem('spoti-token')) {
-            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+           // console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
 
             Auth();
             setToken(localStorage.getItem('spoti-token'));
         } else {
-            console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
+          //  console.log("localStorage.getItem('spoti-token'):::" , localStorage.getItem('spoti-token'))
 
         }
 
@@ -136,7 +137,7 @@ const Home = () => {
                     <p> 뚜플리</p>
                 </div>*/}
                     <img src={mainIcon} className="w-10 h-14 animate-bounce"/>
-                    <span className="font-pretendard mx-8 text-xl text-charry font-semibold">뚜플리</span>
+                    <span className="font-pretendard mx-8 text-lg text-charry font-semibold">뚜플리</span>
                     <img src={mainIcon2} className="w-16 h-12 mt-16 animate-bounce"/>
                     {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
                 </div>

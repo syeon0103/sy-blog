@@ -67,6 +67,13 @@ function App() {
         return () => clearTimeout(timer);
     }, []);
 */
+
+    if (import.meta.env.VITE_REACT_APP_ENV === 'development') {
+        console.log("로컬 환경에서 실행 중입니다.")
+    } else {
+        console.log("배포 환경에서 실행 중입니다.")
+    }
+
     return (
         <>
             <RouterProvider router={router} />
