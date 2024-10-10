@@ -3,6 +3,10 @@
     {
       "source": "/playList",
       "destination": "/"
+    },
+    {
+      "source": "/",
+      "destination": "/"
     }
   ]
 }
