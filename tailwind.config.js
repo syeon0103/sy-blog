@@ -37,7 +37,7 @@ export default {
         'pretendard': ['Pretendard-Regular', 'sans-serif'],
       },
       screens: {
-        sm: { min: "23.438rem", max: "47.9375rem" },
+        sm: { min: "10.438rem", max: "47.9375rem" },
         md: { min: "48rem", max: "63.9375rem" },
         lg: { min: "64rem", max: "79.9375rem" },
         xl: { min: "80rem", max: "95.9375rem" },

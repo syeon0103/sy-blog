@@ -269,14 +269,14 @@ const PlayList = ( ) => {
     return (
         <div className="bg-[#e9e8ed] w-full min-h-screen flex flex-col items-center gap-5 p-3">
 
-            <div className="flex flex-row items-center justify-center">
-                {/*    <div className="text-gray-700 font-normal font-pretendard sm:text-2xl md:text-2xl text-4xl ">
-                    <p> 뚜플리</p>
-                </div>*/}
-                <img src={mainIcon as string} className="w-10 h-14 animate-bounce" alt="아이콘1"/>
-                <span className="font-pretendard mx-8 text-2xl text-charry font-semibold">뚜플리</span>
-                <img src={mainIcon2 as string} className="w-16 h-12 mt-16 animate-bounce"  alt="아이콘2"/>
-                {/* <Lottie animationData={book} loop={true} autoplay={true} className="w-48 sm:w-28"/>*/}
+            <div className="mt-10 flex flex-col items-center justify-center w-full">
+                <div className="flex items-center justify-center">
+                    <img src={mainIcon as string} className="w-10 h-14 sm:h-6 animate-bounce"/>
+                    <div className=" sm:mx-4 w-20 sm:w-28 items-center justify-center flex">
+                        <span className="font-pretendard text-lg text-charry font-semibold">뚜플리</span>
+                    </div>
+                    <img src={mainIcon2 as string} className="w-16 h-12 sm:h-8 animate-bounce "/>
+                </div>
             </div>
 
             <div className="flex flex-row  sm:flex-col  md:flex-col">
@@ -317,8 +317,6 @@ const PlayList = ( ) => {
                                 </div>
                             </ul>
                         ))}
-
-
 
 
                     </div>
