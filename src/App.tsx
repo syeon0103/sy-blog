@@ -68,7 +68,10 @@ function App() {
     }, []);
 */
 
-    if (import.meta.env.VITE_REACT_APP_ENV === 'development') {
+
+    console.log("모드::::::::" , import.meta.env.MODE)
+
+    if (import.meta.env.MODE === 'development') {
         console.log("로컬 환경에서 실행 중입니다.")
     } else {
         console.log("배포 환경에서 실행 중입니다.")
