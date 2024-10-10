@@ -19,9 +19,9 @@
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
     "noImplicitThis": true,
-    "alwaysStrict": true,
+    "alwaysStrict": true,/*
     "outDir": "./src",
-    "declaration": false, // .d.ts 파일 생성을 비활성화
+    "declaration": false, // .d.ts 파일 생성을 비활성화*/
   },
   "exclude": [
     "node_modules",
