@@ -82,45 +82,69 @@ const Book = ({list} : bookList) => {
 
     const getBooks = async (query: string | null) => {
 
-        const config:  {
+     /*   const config:  {
             headers: { "X-Naver-Client-Id": string; "X-Naver-Client-Secret": string };
-            params: { query: string; display: number }
+            params: { query: string; display: number}
         } = {
             headers: {
                 'X-Naver-Client-Id': apiKey,
                 'X-Naver-Client-Secret': client_key,
             },
-            params: { query: query as string, display: 1 },
+            params: { query: query as string, display: 1   },
         };
 
+
+        //{"errorMessage":"Not Exist Client ID : Authentication failed. (인증에 실패했습니다.)","errorCode":"024"}
+        // GET http://localhost:5173/api/v1/search/book.json?display=1 400 (Bad Request)  (Check Extension or Required Parameter)'
+        //{\n\t\"errorMessage\":\"Incorrect query request (잘못된 쿼리요청입니다.)\",\n\t\"errorCode\":\"SE01\"\n}"
         const resp = await axios.get(`/api/v1/search/book.json`, config);
+        return resp.data;*/
+
+
+        const queryString = `?query=${encodeURIComponent(query as string)}&display=1`;
+
+        const config = {
+            headers: {
+                'X-Naver-Client-Id': apiKey,
+                'X-Naver-Client-Secret': client_key,
+            },
+        };
+
+
+
+
+        const resp = await axios.get(`/api/v1/search/book.json${queryString}`, config);
+        console.log("book.data:::" , resp.data)
         return resp.data;
 
-       /* try {
-            const resp = await axios.get(`/api/v1/search/book.json` , {
-                headers : {
-                    'X-Naver-Client-Id' : apiKey,
-                    'X-Naver-Client-Secret': client_key,
-                },
-                params: { query , display: 1},
-            })
 
 
-           /!* const resp = await axios.get(`https://dapi.kakao.com/v3/search/book` , {
-                headers : {
-                    Authorization : `KakaoAK ${apiKey}`,
-                },
-                params : {
-                    query : query ,
-                    size : 1
-                }
-            })*!/
-            return resp.data;
 
-        } catch (error) {
-            console.log("error:::" , error);
+        /* try {
+             const resp = await axios.get(`/api/v1/search/book.json` , {
+                 headers : {
+                     'X-Naver-Client-Id' : apiKey,
+                     'X-Naver-Client-Secret': client_key,
+                 },
+                 params: { query , display: 1},
+             })
 
-        }*/
+
+            /!* const resp = await axios.get(`https://dapi.kakao.com/v3/search/book` , {
+                 headers : {
+                     Authorization : `KakaoAK ${apiKey}`,
+                 },
+                 params : {
+                     query : query ,
+                     size : 1
+                 }
+             })*!/
+             return resp.data;
+
+         } catch (error) {
+             console.log("error:::" , error);
+
+         }*/
 
 
     }
