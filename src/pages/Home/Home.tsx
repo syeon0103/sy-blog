@@ -71,13 +71,13 @@ const Home = () => {
             window.location.hash = '';
         }
         if(!localStorage.getItem('spoti-token')) {
-           // console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
+           console.log("localStorage.getItem('spoti-token')21111111111111111111111111:::" , localStorage.getItem('spoti-token'))
 
             Auth();
             setToken(localStorage.getItem('spoti-token'));
         } else {
-            //console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
-           // Auth();
+           console.log("localStorage.getItem('spoti-token')22222222222222222:::" , localStorage.getItem('spoti-token'))
+          // Auth();
             setToken(localStorage.getItem('spoti-token'));
         }
 
